@@ -1,0 +1,163 @@
+/* *{
+    box-sizing: border-box;
+} */
+
+/* body{
+    color: #111;
+    background-color: yellow;
+} */
+
+/* div{
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    float: left;
+    background-color: orange;
+} */
+/* 
+#141B03;
+#5C7E0E;
+#8AB029;
+#A9D63F;
+#F03118;
+
+#E1F7CD;
+#DDF8C3;
+#CEEEB0;
+#B7E091;
+#9ED868; 
+*/
+
+h1{
+    text-align: center;
+    display: inline-block;
+}
+
+/*====================
+    Bootstrap classes
+======================*/
+
+.btn-exit{ background-color: #141B03; color: #fff; display: inline-block;}
+.btn-exit:hover{ background-color: #203B09; color: #fff; }
+
+.jumbotron{
+    background-color: #9ED868;
+    /* background-image: url("../images/bella.jpg"); */
+    /* background-repeat: no-repeat; */
+    color: white;
+}
+
+.btn-danger{
+    background-color: #EE6630;
+}
+
+.my-well{
+    height: 300px;
+}
+.my-clear{
+    clear: both;
+}
+
+.submit-button{
+    width: 150px;
+    margin-left: auto;
+/*     float: right;
+ */}
+
+.my-form{
+    margin-bottom: 50px;
+}
+/* form{
+    margin: 0 auto;
+    width: 250px;
+} */
+
+
+.tabla-estadistica{
+    /* float: right; */
+    margin: 0 auto;
+    padding: 5px 15px;
+    width: 100%;
+    background-color: #9ED868;
+}
+
+#una_parte_cantidad{
+    visibility: hidden;
+    margin-bottom: 10px;
+    width: 64px;
+    display: inline-block;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: rgba(126, 239, 104, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
+  outline: 0 none;
+}
+
+.well{
+    background-color: #CEEEB0;
+}
+
+.navbar{
+    background-color: #141B03;
+}
+
+body{
+    /* background-color: #E1F7CD; */
+    /* font-size: 20px;  */
+}
+
+.my-logo{
+    height: 50px;
+}
+
+.my-well img{
+    width: 100%;
+}
+
+.navbar-default .navbar-nav > .active{
+    background-color: #fbdb65;
+}
+
+.navbar-default .navbar-nav > .active > a, 
+ .navbar-default .navbar-nav > .active > a:hover, 
+ .navbar-default .navbar-nav > .active > a:focus {
+      color: #000;
+      background: #d65c14;
+ }
+
+.my-well{
+    overflow: hidden;
+}
+
+.green-highlight{
+    background-color: red;
+}
+
+div.ui-datepicker{
+ font-size:20px;
+}
+
+.tabla-de-ahorros > div:nth-child(1){ 
+        padding-bottom: 0; 
+        border-bottom: 
+        1px solid black; 
+    }
+
+.tabla-de-ahorros > div{ padding: 0 0 10px 0; width: 80%; margin: 0 auto; }
+.tabla-de-ahorros > div:nth-child(1){ font-weight: bolder; text-align: center; }
