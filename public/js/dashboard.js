@@ -134,7 +134,6 @@ function getVariablesForTab(tab){
         }
     } else{
         deuda = parseInt(tab['cantidad_a_abonar']) + (abonos_al_corriente - tab['ahorro_parcial']);
-        console.log("estamos aqui");
     }
     $('#tab-meta_de_ahorro').html(tab['meta_de_ahorro']);
     $('#tab-deuda').html(deuda);
@@ -144,7 +143,8 @@ function getVariablesForTab(tab){
     $('#tab-ahorro_parcial').html(tab['ahorro_parcial']);
     $('#tab-cantidad_faltante').html(cantidad_faltante);
 
-    // console.log(hoy);
+    $('#hidden-meta_de_ahorro').val(tab['meta_de_ahorro']);
+    $('#hidden-abonar_todo').val(deuda);
     return {
         hoy                 : hoy,
         num_de_intervalos   : num_de_intervalos,
@@ -214,8 +214,9 @@ $(function(){
         $('#metas_tabs').append(metas_tabs);
         $('#metas').append(metas);
 
-        $('#metas div:first').addClass('in');
-        $('#metas div:first').addClass('active');
+        // $('#metas div:first').addClass('in');
+        // $('#metas div:first').addClass('active');
+
         $('#metas_tabs li:first').addClass('active');
 
         if($("#metas").has("div").length){
@@ -233,14 +234,14 @@ $(function(){
 
             $('#metas').children('div#'+meta_values).each(function(index){
                 $(this).children('p').each(function(index2){
-                    // console.log(($(this).find('>:first-child').html())+": "+($(this).find('>:nth-child(2)').html()));
                     valores_de_meta[$(this).find('>:first-child').html()] = $(this).find('>:nth-child(2)').html();
                 });
             });
-            console.log(valores_de_meta);
             var aver = getVariablesForTab(valores_de_meta);
-            console.log("ZZZ "+aver['plazo_vencido']);
-            console.log("YYY "+aver['num_de_intervalos']);
+            $('#metas').removeClass('in');
+            $('#metas').removeClass('active');
+            $('#metas').css('display', 'none');
+
         });
     });
 });
