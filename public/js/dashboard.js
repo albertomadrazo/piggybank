@@ -1,9 +1,28 @@
 var Tiempo = (function(){
     var intervalo;
     var intervalo_en_texto;
+    var ahorro_parcial;
+    var cantidad_a_abonar;
 
-    dia = function(dias=1){
-        return parseInt(dias) * 86400;
+
+    set_ahorro_parcial = function(cantidad){
+        ahorro_parcial = cantidad;
+    }
+
+    get_ahorro_parcial = function(){
+        return ahorro_parcial;
+    }
+
+    set_cantidad_a_abonar = function(cantidad){
+        cantidad_a_abonar = cantidad;
+    }
+
+    get_cantidad_a_abonar = function(){
+        return cantidad_a_abonar;
+    }
+
+    dia = function(dias){
+        return (parseInt(dias) * 86400);
     };
 
     fecha_de_hoy = function(){
@@ -12,11 +31,21 @@ var Tiempo = (function(){
 
     };
 
+    timestamp_to_date = function(timestamp){
+        timestamp = new Date(timestamp*1000);
+        var result =timestamp.getFullYear()+"-"+
+        (((timestamp.getMonth()+1) < 10) ?
+                ("0"+(timestamp.getMonth()+1)): (timestamp.getMonth()+1))+
+        "-"+timestamp.getDate();
+        return result;
+    }
     // Convierte la fecha en string al formato
     // que necesito 'YYYY-MM-DD'
     my_strtotime = function(fecha){
-        var fecha = new Date(fecha);
-        return fecha.getFullYear()+"-"+(fecha.getMonth()+ 1)+"-"+fecha.getDate();
+        // var fecha = new Date(fecha);
+        return Date.parse(fecha)/1000;
+        // return fecha;
+        // return fecha.getFullYear()+"-"+(fecha.getMonth()+ 1)+"-"+fecha.getDate();
 
     }
 
@@ -43,6 +72,7 @@ var Tiempo = (function(){
         return intervalo_en_texto;
     };
 
+    // pendiente, no se para que sirva
     calcular_periodo = function(desde, hasta){
         stamp_desde = Math.round(new Date(desde).getTime()/1000);
         stamp_hasta = Math.round(new Date(hasta).getTime()/1000);
@@ -55,76 +85,79 @@ var Tiempo = (function(){
     cantidad_de_intervalos = function(fecha_inicial, fecha_final, intervalo){
         fecha_inicial = Math.round(new Date(fecha_inicial).getTime()/1000);
         fecha_final = Math.round(new Date(fecha_final).getTime()/1000);
-
+        
         return parseInt((fecha_final - fecha_inicial) / dia(intervalo));
     };
 
-    plazo_vencido = function(fecha, intervalo){
-        var plazo = [];
-
-         switch(intervalo){
-            case 'dia':
-                plazo = [1, "days"];
-                break;
-            case 'semana':
-                plazo = [1, "weeks"];
-                break;
-            case 'quincena':
-                plazo = [15, "days"];
-                break;
-            case 'mes':
-                plazo = [1, "months"];
-                break;
-            case 'año':
-                plazo = [1, "years"];
-                break;
-            default:
-                plazo = [1, "weeks"];
-        }  
-
-        plazo = parseInt(moment().subtract(plazo[0], plazo[1]).calendar());
-        if(parseInt(fecha) > plazo){
-            // return true;
-            console.log("Ha pasado mas de "+intervalo);
+    plazo_vencido = function(fecha_inicial, intervalo){
+        var oneDay = 24*60*60*1000;
+        var hoy = my_strtotime(new Date());
+        // var hoy = Math.round(moment().add(5, 'days')/1000);
+        var fecha_inicial = my_strtotime(fecha_inicial);
+        var dias_transcurridos = Math.round((hoy - fecha_inicial)/86400);
+        var b = dias_transcurridos / intervalo;
+        // console.log("----");
+        // console.log((dias_transcurridos));
+        // console.log(hoy +" " +fecha_inicial);
+        // console.log((get_ahorro_parcial()/get_cantidad_a_abonar()));
+        var abonos_al_corriente = get_cantidad_a_abonar() * dias_transcurridos;
+        // console.log("cantidad_a_abonar="+(cantidad_a_abonar));
+        // console.log("abonos_al_corriente="+(abonos_al_corriente));
+        // console.log("ahorro_parcial="+(get_ahorro_parcial()));
+        if((b / intervalo < 1) || (get_ahorro_parcial() >= abonos_al_corriente)){
+            // console.log("No ha vencido");
+            return false;
+        }
+        else if((b / intervalo >= 1) && (get_ahorro_parcial() < abonos_al_corriente)){
+            return true;
+            // console.log("Ya venció");
         } else{
-            // return false;
-            console.log("No ha pasado "+intervalo+" aun.");
-        } 
+
+            console.log("Aqui");
+        }
     }
 
     return {
         dia:                         dia,
         fecha_de_hoy:                fecha_de_hoy,
+        timestamp_to_date:           timestamp_to_date,
         convertir_intervalo_a_texto: convertir_intervalo_a_texto,
-        // calcular_periodo:            calcular_periodo,
         cantidad_de_intervalos:      cantidad_de_intervalos,
-        plazo_vencido:               plazo_vencido
+        plazo_vencido:               plazo_vencido,
+        my_strtotime:                my_strtotime,
+        set_ahorro_parcial:          set_ahorro_parcial,
+        set_cantidad_a_abonar:       set_cantidad_a_abonar,
+        get_ahorro_parcial:          get_ahorro_parcial,    
     }
 })();
 
 
 function getVariablesForTab(tab){
 
+    Tiempo.set_ahorro_parcial(tab['ahorro_parcial']);
+    Tiempo.set_cantidad_a_abonar(tab['cantidad_a_abonar']);
     var hoy = moment().format('YYYY-MM-DD');
     var num_de_intervalos = Tiempo.cantidad_de_intervalos(
         tab['fecha_inicial'],
         tab['fecha_final'],
         tab['intervalo']
     );
+    // console.log("num_de_intervalos = " + num_de_intervalos);
     var deuda = 0;
     var intervalo_actual = (Tiempo.cantidad_de_intervalos(tab['fecha_inicial'], hoy, tab['intervalo'])+1);
     var intervalos_faltantes = num_de_intervalos - intervalo_actual;
     var cantidad_faltante = tab['total'] - tab['ahorro_parcial'];
-    var ultimo_intervalo = my_strtotime(tab['fecha_inicial']) + (Tiempo.dia(tab['intervalo']));
-    var plazo_vencido = Tiempo.plazo_vencido(ultimo_intervalo, Tiempo.convertir_intervalo_a_texto(parseInt(tab['intervalo'])));
-    
-    plazo_vencido = hoy; // ????????
 
-    // if(plazo_vencido){
-    //     console.log("Es hora de ahorrar.");
-    // } else{
-    //     console.log("Estás al día.");
-    // }
+    // Calcula el tiempo desde el inicio hasta el ultimo intervalo
+    var ultimo_intervalo = my_strtotime(tab['fecha_inicial']) + (Tiempo.dia(tab['intervalo']));
+
+    var vinci = Tiempo.plazo_vencido(tab['fecha_inicial'],tab['intervalo']);
+    if(!vinci){
+        $('#al_dia').html("Estás al día.");
+    } else{
+        $('#al_dia').html("Es hora de ahorrar.");
+    }
+
     var abonos_al_corriente = tab['cantidad_a_abonar'] * intervalo_actual;
 
     if(parseInt(tab['ahorro_parcial']) >= parseInt(abonos_al_corriente)){
@@ -151,7 +184,7 @@ function getVariablesForTab(tab){
         intervalo_actual    : intervalo_actual,
         cantidad_faltante   : cantidad_faltante,
         ultimo_intervalo    : ultimo_intervalo,
-        plazo_vencido       : plazo_vencido,
+        // plazo_vencido       : plazo_vencido,
         intervalos_faltantes: intervalos_faltantes,
         abonos_al_corriente : abonos_al_corriente
     }

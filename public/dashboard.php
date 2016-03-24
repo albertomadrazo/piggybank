@@ -17,6 +17,7 @@
 
             $user_savings = Ahorro::get_by_user_id($user->id);
             $goal = array();
+            echo '<span id="al_dia"></span>';
     ?>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
