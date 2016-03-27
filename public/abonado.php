@@ -5,6 +5,8 @@
 if(isset($session->user_id)){
     $user = User::find_by_id($session->user_id);
     echo $user->username."<br>";
+    print_r($_SESSION);
+    output_message($session->get_message());
     if(isset($_POST)){
         // print_r($_POST);
     }

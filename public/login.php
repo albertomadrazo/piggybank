@@ -10,7 +10,8 @@ if(isset($_POST['submit'])){
 
     if($found_user){
         $session->login($found_user);
-        redirect_to("index.php");
+        $session->set_message("");
+        redirect_to("dashboard.php");
     } else{
         echo "Nombre de usuario o contrase&ntilde;a equivocados.";
         $message = "Nombre de usuario o contrase&ntilde;a equivocados.";
@@ -22,12 +23,29 @@ if(isset($_POST['submit'])){
 
 ?>
 
-<form action="login.php" method="post">
-    usuario<br>
-    <input type="text" name="username"><br>
-    contrase&ntilde;a<br>
-    <input type="password" name="password"><br>
-    <button name="submit">Entrar</button>
-</form>
+<?php include_layout_template("header.php"); ?>
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-md-offset-4 col-lg-offset-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 my-form">    
+        <h2>Inicia Sesi&oacute;n</h2>
+        <form action="login.php" method="post" role="form" id="signup-form">
+            <div class="form-group">
+                <label for="username">        
+                usuario<br>
+                </label>
+                <input type="text" class="form-control" name="username" id="username"><br>
+            </div>
 
-<?php if(isset($database)) { $database->close_connection(); } ?>
+            <div class="form-group">
+                <label for="password">
+                contrase&ntilde;a<br>
+                </label>
+                <input type="password" class="form-control" name="password" id="password"><br>
+            </div>
+            <button class="btn btn-danger signup-button" name="submit">Entrar</button>
+        </form>
+    </div>
+</div>
+
+<?php include_layout_template("footer.php"); ?>
+
+<script type="text/javascript" src="js/jquery.validate.js"></script>

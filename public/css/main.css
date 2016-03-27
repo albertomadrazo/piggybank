@@ -14,9 +14,9 @@
     float: left;
     background-color: orange;
 } */
-/* 
-#141B03;
-#5C7E0E;
+ 
+#00ff24;
+#5C7E0E; 
 #8AB029;
 #A9D63F;
 #F03118;
@@ -26,7 +26,7 @@
 #CEEEB0;
 #B7E091;
 #9ED868; 
-*/
+
 
 h1{
     text-align: center;
@@ -36,6 +36,7 @@ h1{
 /*====================
     Bootstrap classes
 ======================*/
+.form-group{ margin-bottom: 0; }
 
 .btn-exit{ background-color: #141B03; color: #fff; display: inline-block;}
 .btn-exit:hover{ background-color: #203B09; color: #fff; }
@@ -63,6 +64,10 @@ h1{
     margin-left: auto;
 /*     float: right;
  */}
+
+.signup-button{
+    float: right;
+}
 
 .my-form{
     margin-bottom: 50px;
@@ -161,3 +166,35 @@ div.ui-datepicker{
 
 .tabla-de-ahorros > div{ padding: 0 0 10px 0; width: 80%; margin: 0 auto; }
 .tabla-de-ahorros > div:nth-child(1){ font-weight: bolder; text-align: center; }
+
+.error{ color: red; }
+
+.tab-content{
+    background-color:#303136;
+    color:#fff;
+}
+
+.nav-tabs > li > a:hover{
+    background-color: #5C7E0E !important;
+    border: medium none;
+    color:#fff;
+}
+
+.nav-tabs > li.active > a:focus{
+    background-color: #9ED868;  
+}
+
+.nav-tabs > li.active > a{
+    background-color: #9ED868;  
+}
+
+.nav-tabs > li > a{
+    color:#000 !important;
+}
+
+/* .nav-tabs {
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-height: 46px;
+} */

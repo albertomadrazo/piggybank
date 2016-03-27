@@ -12,22 +12,52 @@ function toggleVisible(element){
 }
 
 
-
-
-
 $(document).ready(function(){
-
-    // var fecha = moment(moment().subtract(3, 'months'), "YYYY-MM-DD");
-    // fecha = new Date(fecha);
-    // fecha = fecha.getFullYear()+"-"+(fecha.getMonth()+ 1)+"-"+fecha.getDate(); 
-
-    // // Tiempo.plazo_vencido(fecha, "mes");
-    // // console.log(Tiempo.convertir_intervalo_a_texto(365));
-
-    // // console.log(Tiempo.cantidad_de_intervalos('2016-05-03', '2017-05-03', 7));
 
     $('#date_picker1').datepicker({dateFormat: "yy-mm-dd"});
     $('#date_picker2').datepicker({dateFormat: "yy-mm-dd"});
 
+
+    // Validate fields for signup.php and signin.php
+    $('#signup-form').validate({
+        rules:{
+            first_name: 'required',
+            username:{
+                required: true,
+                minlength: 3
+            },
+            password:{
+                required: true,
+                minlength: 4
+            },
+            confirm_password:{
+                required: true,
+                equalTo: '#password'
+            },
+            email:{
+                required: true,
+                email: true
+            }
+        },
+        messages:{
+            first_name: "Es necesario un nombre",
+            username:{
+                required: "Es necesario un nombre de usuario",
+                minlength: "El nombre de usuario debe ser de al menos 3 letras"
+            },
+            email:{
+                required: "Escribe un correo v&aacute;lido",
+                email: "Escribe un correo v&aacute;lido"
+            },
+            password:{
+                required: "Es necesaria una contraseña",
+                minlength: "La contraseña debe ser de al menos 4 letras"
+            },
+            confirm_password:{
+                required: "La contraseña debe ser verificada",
+                equalTo: "La contraseña no es igual a la de arriba"
+            }
+        }
+    });
 
 });

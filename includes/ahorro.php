@@ -103,6 +103,22 @@ class Ahorro extends DatabaseObject {
         $database->query($sql);
         return ($database->affected_rows() == 1) ? true : false;
     }
+
+    public function giveVariablesForTab($id){
+        $user_savings = self::get_by_user_id($id);
+        $goal = array();
+        $subgoal = array(); 
+
+        foreach($user_savings as $meta){
+            $subgoal = array();
+            foreach($meta as $key=>$value){
+                $subgoal[$key] = $value;
+            }
+            array_push($goal, $subgoal);
+        }   
+
+        return json_encode($goal);
+    }
 }
 
 ?>
