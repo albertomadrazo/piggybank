@@ -10,7 +10,8 @@
             if(isset($session->user_id)){
                 $user = User::find_by_id($session->user_id);        
 
-                echo "<div style=\"visibility:hidden\" id=\"user-id\">{$user->id}</div>";        
+                echo "<div style=\"visibility:hidden\" id=\"user-id\">{$user->id}</div>";
+
 
                 if($user){
 
@@ -20,7 +21,10 @@
                         redirect_to("index.php");
                     }
 
-                    echo "<strong>Hola {$user->username}</strong><br>";
+                    echo "<strong>Hola {$user->full_name}</strong>";
+                    $om = output_message($session->get_message());
+                    echo $om;
+                    "<br>";
                     $user_savings = Ahorro::get_by_user_id($user->id);
                     $goal = array();
                     echo '<span id="al_dia"></span>';

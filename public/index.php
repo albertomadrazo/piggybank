@@ -29,6 +29,9 @@ if(isset($_POST['submit'])){
     $tiempo = new Tiempo();
     $slug = Ahorro::slugify($meta_ahorro);
     echo "slug = ".$slug;
+
+    ///////////////////////7
+
     $ahorro = new Ahorro($user->id, $meta_ahorro, $slug, $cantidad, $calculo->abono, $periodo, $calculo->intervalo, 0, $desde, $hasta, "linear");
 
     $ahorro->save();
@@ -46,6 +49,16 @@ if(isset($_POST['submit'])){
         redirect_to("login.php");
     } else{
         $user = User::find_by_id($session->user_id);
+
+        $sql = "SELECT * FROM ahorro WHERE user_id='";
+        $sql .= $user->id."'";  
+        $ahorro_fields = Ahorro::find_by_sql($sql);
+        $ahorro_fields = count($ahorro_fields);
+        if($ahorro_fields > 3){
+            $session->set_message("Ya tienes más de 3 metas<br>
+                ¿Quieres <a href=\"delete.php\">borrar</a> una?");
+            redirect_to("dashboard.php");
+        }
     }
 ?>
 
@@ -54,14 +67,14 @@ if(isset($_POST['submit'])){
 <div class="row">
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <?php 
-echo "<span class=\"navbar-brand\"><strong>Hola {$user->username}</strong></span>";
+echo "<span class=\"navbar-brand\"><strong>Hola {$user->full_name}</strong></span>";
 echo "<span class=\"error\">{$session->get_message()}</span>";
 $session->set_message("");
 ?>  
 
 </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 my-form">
-        <form action="index.php"  method="post" onsubmit="event.preventDefault(); canSubmit();">
+        <form action="index.php"  method="post">
             <input type="text" class="form-control my-input" name="meta_ahorro" placeholder="C&oacute;mo se llama tu meta?" /><br>
             <span class="error my_message"></span>
             <input type="text" class="form-control my-input is-int" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?" /><br>     
@@ -122,6 +135,8 @@ $session->set_message("");
 </div>
 
 <?php
+
+
 }
 ?>
 
