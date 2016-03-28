@@ -33,6 +33,10 @@ h1{
     display: inline-block;
 }
 
+body{
+    background-color: #eef9dd;
+}
+
 /*====================
     Bootstrap classes
 ======================*/
@@ -43,18 +47,25 @@ h1{
 
 .jumbotron{
     background-color: #9ED868;
-    /* background-image: url("../images/bella.jpg"); */
-    /* background-repeat: no-repeat; */
     color: white;
 }
 
 .btn-danger{
-    background-color: #EE6630;
+    background-color: #5C7E0E;
+    border-color: #141B03;
+    font-weight: bold;
+}
+
+.btn-danger:hover{
+    background-color: #8AB029;
+    border-color: #141B03;
+    font-weight: bold;
 }
 
 .my-well{
-    height: 300px;
+    height: 400px;
 }
+
 .my-clear{
     clear: both;
 }
@@ -62,8 +73,8 @@ h1{
 .submit-button{
     width: 150px;
     margin-left: auto;
-/*     float: right;
- */}
+    float: right;
+}
 
 .signup-button{
     float: right;
@@ -72,14 +83,8 @@ h1{
 .my-form{
     margin-bottom: 50px;
 }
-/* form{
-    margin: 0 auto;
-    width: 250px;
-} */
-
 
 .tabla-estadistica{
-    /* float: right; */
     margin: 0 auto;
     padding: 5px 15px;
     width: 100%;
@@ -116,24 +121,16 @@ input[type="color"]:focus,
 
 .well{
     background-color: #CEEEB0;
+    border: none;
 }
 
-.navbar{
-    background-color: #141B03;
+.navbar{ background-color: #142B03; }
+
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+color: #fff;  /*Sets the text hover color on navbar*/
 }
 
-body{
-    /* background-color: #E1F7CD; */
-    /* font-size: 20px;  */
-}
-
-.my-logo{
-    height: 50px;
-}
-
-.my-well img{
-    width: 100%;
-}
+.my-logo{ height: 50px; }
 
 .navbar-default .navbar-nav > .active{
     background-color: #fbdb65;
@@ -143,26 +140,18 @@ body{
  .navbar-default .navbar-nav > .active > a:hover, 
  .navbar-default .navbar-nav > .active > a:focus {
       color: #000;
-      background: #d65c14;
+      background: #A9D63F;
  }
 
-.my-well{
-    overflow: hidden;
-}
+.green-highlight{ background-color: red; }
 
-.green-highlight{
-    background-color: red;
-}
-
-div.ui-datepicker{
- font-size:20px;
-}
+div.ui-datepicker{ font-size:20px; }
 
 .tabla-de-ahorros > div:nth-child(1){ 
-        padding-bottom: 0; 
-        border-bottom: 
-        1px solid black; 
-    }
+    padding-bottom: 0; 
+    border-bottom: 
+    1px solid black; 
+}
 
 .tabla-de-ahorros > div{ padding: 0 0 10px 0; width: 80%; margin: 0 auto; }
 .tabla-de-ahorros > div:nth-child(1){ font-weight: bolder; text-align: center; }
@@ -192,9 +181,19 @@ div.ui-datepicker{
     color:#000 !important;
 }
 
-/* .nav-tabs {
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  min-height: 46px;
-} */
+.nav-tabs{
+    background-color: #141B03;
+    border-radius: 4px 4px 0 0;
+}
+
+.cita{
+    font-size: 2em;
+    padding:30px;
+    padding-bottom: 20px;
+}
+
+.autor{
+    float: right;
+    font-size: 1.5em;
+    padding-right:30px; 
+}

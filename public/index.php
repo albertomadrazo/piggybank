@@ -103,8 +103,21 @@ $session->set_message("");
         </form>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 visible-lg visible-md visible-sm">
-        <div class="well my-well"><p><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident repellat nesciunt unde, impedit, vel repellendus quo ipsum, error non adipisci vero! Rerum aperiam, nisi tempora perferendis in quia accusamus. <br><br>
-        At, porro, assumenda incidunt facere qui sit dicta accusantium unde, adipisci quasi id est nesciunt sunt, et sed deserunt reiciendis nisi!</i></p></div>
+        <div class="well my-well">
+            <p class="cita">
+                <i>
+                    <q>
+                    <?php 
+                        $cita = Cita::get_random_quote();
+                        echo $cita->texto;
+                    ?>
+                    </q>
+                </i>
+            </p>
+            <p class="autor">
+                <?php echo $cita->autor; ?> 
+            </p>
+        </div>
     </div>
 </div>
 

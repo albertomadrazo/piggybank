@@ -9,10 +9,24 @@ class Cita extends DatabaseObject{
     public $texto;
     public $autor;
 
-    public function __construct($user_id, $texto, $autor){
+    public function __construct($user_id="", $texto="", $autor=""){
         $this->user_id = $user_id;
         $this->texto = $texto;
         $this->autor = $autor;
+    }
+
+    public static function get_random_quote(){
+        global $database;
+
+        $citas = static::find_all();
+        // print_r($citas);
+        // $sql = "SELECT * FROM citas";//.$this->table_name;
+        // $result = $database->query($sql);
+        // echo $result;
+        // print_r($result);
+        // print_r($citas);
+        $random_quote = rand(0, count($citas)-1);
+        return $citas[$random_quote];
     }
 
     protected function attributes(){
@@ -46,7 +60,44 @@ class Cita extends DatabaseObject{
             return false;
         }
     }
-    
+
+    // public static function find_all(){
+    //     return static::find_by_sql("SELECT * FROM ".static::$table_name);
+    // }
+
+    // public static function find_by_id($id=0){
+    //     global $database;
+    //     $result_array =  static::find_by_sql("SELECT * FROM ".static::$table_name." WHERE id = {$id} LIMIT 1");
+    //     return !empty($result_array) ? array_shift($result_array) : false;
+    // }
+
+    // public static function find_by_sql($sql=""){
+    //     // MySQL database class instance
+    //     global $database;
+    //     // return the results of the query and assign them
+    //     $result_set = $database->query($sql);
+    //     // declare an array named $object_array
+    //     $object_array = array();
+    //     // loop through all found rows
+    //     while($row = $database->fetch_array($result_set)){
+    //         // and put each in an object
+    //         $object_array[] = static::instantiate($row);
+    //     }
+    //     return $object_array;
+    // }
+
+    // private static function instantiate($record){
+    //     // $class_name = get_called_class(); <---- ???
+    //     $object = new static;
+    //     foreach($record as $attribute=>$value){
+    //         if($object->has_attribute($attribute)){
+    //             $object->$attribute = $value;
+    //         }
+    //     }
+
+    //     return $object;
+    // }
+
 }
 
 ?>
