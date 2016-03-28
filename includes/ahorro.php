@@ -32,8 +32,16 @@ class Ahorro extends DatabaseObject {
         // $this->slug = slugify($this->meta_de_ahorro);
     }
 
-    public static function slugify($string){
-        return str_replace(" ", "-", strtolower($string));
+    public static function slugify($input){
+        // Código tomado de 
+        // http://stackoverflow.com/questions/7530238/convert-ascii-and-utf-8-to-non-special-characters-with-one-function
+        $string = html_entity_decode($input,ENT_COMPAT,"UTF-8");
+        $oldLocale = setlocale(LC_CTYPE, '0');  
+        setlocale(LC_CTYPE, 'en_US.UTF-8');
+        $string = iconv("UTF-8","ASCII//TRANSLIT",$string);
+        setlocale(LC_CTYPE, $oldLocale);
+
+        return strtolower(preg_replace('/[^a-zA-Z0-9]+/','-',$string));
     }
 
     public static function get_by_user_id($id){

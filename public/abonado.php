@@ -14,7 +14,9 @@ if(isset($session->user_id)){
     $sql = "SELECT * FROM ahorro WHERE user_id ='";
     $sql .= $user->id;
     $sql .= "' AND meta_de_ahorro='";
+    // $sql .= "' AND slug='";
     $sql .= $_POST['meta_de_ahorro']."'";
+    // $sql .= $_POST['slug']."'";
 
     $user_savings = Ahorro::find_by_sql($sql);
 
