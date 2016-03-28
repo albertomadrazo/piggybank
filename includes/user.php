@@ -4,12 +4,13 @@ require_once(LIB_PATH.DS."database.php");
 
 class User extends DatabaseObject{
     protected static $table_name = "users";
-    protected static $db_fields = array('id', 'username', 'password', 'first_name', 'last_name');
+    protected static $db_fields = array('id', 'username', 'password', 'full_name', /*'last_name', */'email');
     public $id;
     public $username;
     public $password;
-    public $first_name;
-    public $last_name;
+    public $full_name;
+    public $email;
+    // public $last_name;
 
     public function full_name(){
         if(isset($this->first_name) && isset($this->last_name)){
@@ -36,18 +37,19 @@ class User extends DatabaseObject{
         global $database;
         $username = $database->escape_value($username);
         $password = $database->escape_value($password);
-        $first_name = $database->escape_value($first_name);
+        $full_name = $database->escape_value($full_name);
+        $email = $database->escape_value($email);
 
         // Checa si el usuario ya existe
         $sql = "SELECT * FROM users ";
-        $sql .= "WHERE username='{%username}'";
+        $sql .= "WHERE username='{$username}'";
         $result_array = self::find_by_sql($sql);
 
         // Si el usuario no existe
         if(empty($result_array)){
             // Crear un nuevo usuario
-            $sql = "INSERT INTO users(username, password, first_name) ";
-            $sql .= "VALUES('{$username}','{$password}', '{$first_name}')";
+            $sql = "INSERT INTO users(username, password, full_name, email) ";
+            $sql .= "VALUES('{$username}','{$password}', '{$full_name}', '{$email}')";
             if($database->query($sql)){
                 return true;
             } else{

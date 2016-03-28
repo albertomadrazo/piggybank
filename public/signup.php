@@ -4,21 +4,24 @@
 if(isset($_POST['submit'])){
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
-    $first_name = trim($_POST['first_name']);
-    // $email = trim()
+    $full_name = trim($_POST['full_name']);
+    $email = trim($_POST['email']);
 
-    $new_user = User::sign_up($username, $password, $first_name);
+    $new_user = User::sign_up($username, $password, $full_name, $email);
     if($new_user){
         $session->login($username);
         redirect_to("index.php");
         // $message = "Hola {$username}, bienvenido.";
     } else{
+        // TODO: Hacer una buena validacion
+        echo "Carajo";
         $message = "Este nombre de usuario ya fue tomado, elige otro.";
     }
 } else{
     $username = "";
     $password = "";
-    $first_name = "";
+    $full_name = "";
+    $email = "";
     $message = "";
 }
 
@@ -31,10 +34,10 @@ if(isset($_POST['submit'])){
 
     <form action="signup.php" method="post" role="form" id="signup-form">
         <div class="form-group">
-            <label for="first_name">
+            <label for="full_name">
             Nombre Completo<br>
             </label>
-            <input type="text" class="form-control" name="first_name" id="first_name"><br>
+            <input type="text" class="form-control" name="full_name" id="full_name"><br>
         </div>
         <div class="form-group">
             <label for="username">

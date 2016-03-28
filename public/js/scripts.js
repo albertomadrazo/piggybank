@@ -12,7 +12,34 @@ function toggleVisible(element){
 }
 
 
-$(document).ready(function(){
+var can_be_submitted = false;
+
+function canSubmit(){
+    console.log(can_be_submitted);
+    return can_be_submitted;
+}
+
+$(document).ready(function(){   
+
+    // TODO: mejorar este event handler
+    $('.is-int').on('focusout', function(){
+        var cifra = $(this).val();
+        // cifra = parseInt(cifra);
+
+        var is_number = /^\d+$/.test(cifra);
+
+        if(!is_number){
+            $(this).prev().html("Sólo números");
+            can_be_submitted = false;
+            return false;
+        } else{
+            $(this).prev().html("");
+            can_be_submitted = true;
+            return true;
+        }
+
+        // console.log(is_number);
+    });
 
     $('#date_picker1').datepicker({dateFormat: "yy-mm-dd"});
     $('#date_picker2').datepicker({dateFormat: "yy-mm-dd"});

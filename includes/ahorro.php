@@ -3,7 +3,7 @@
 class Ahorro extends DatabaseObject {
    
     protected static $table_name = 'ahorro';
-    protected static $db_fields = array('user_id', 'meta_de_ahorro'/*, 'slug'*/, 'total', 'cantidad_a_abonar', 'periodo', 'intervalo', 'ahorro_parcial', 'fecha_inicial', 'fecha_final', 'tipo_de_ahorro');
+    protected static $db_fields = array('user_id', 'meta_de_ahorro', 'slug', 'total', 'cantidad_a_abonar', 'periodo', 'intervalo', 'ahorro_parcial', 'fecha_inicial', 'fecha_final', 'tipo_de_ahorro');
 
     public $user_id;
     public $meta_de_ahorro;
@@ -15,9 +15,9 @@ class Ahorro extends DatabaseObject {
     public $fecha_inicial;
     public $fecha_final;
     public $tipo_de_ahorro;
-    // public $slug;
+    public $slug;
 
-    public function __construct($user_id, $meta_de_ahorro, $total, $cantidad_a_abonar, $periodo, $intervalo, $ahorro_parcial, $fecha_inicial, $fecha_final, $tipo_de_ahorro){
+    public function __construct($user_id, $meta_de_ahorro, $slug, $total, $cantidad_a_abonar, $periodo, $intervalo, $ahorro_parcial, $fecha_inicial, $fecha_final, $tipo_de_ahorro){
         $this->user_id = $user_id;
         $this->meta_de_ahorro = $meta_de_ahorro;
         $this->total = $total;
@@ -28,10 +28,11 @@ class Ahorro extends DatabaseObject {
         $this->fecha_inicial = $fecha_inicial;
         $this->fecha_final = $fecha_final;
         $this->tipo_de_ahorro = $tipo_de_ahorro;
+        $this->slug = $slug;
         // $this->slug = slugify($this->meta_de_ahorro);
     }
 
-    private function slugify($string){
+    public static function slugify($string){
         return str_replace(" ", "-", strtolower($string));
     }
 

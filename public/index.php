@@ -27,8 +27,9 @@ if(isset($_POST['submit'])){
     $calculo->linear_savings();
 
     $tiempo = new Tiempo();
-
-    $ahorro = new Ahorro($user->id, $meta_ahorro, $cantidad, $calculo->abono, $periodo, $calculo->intervalo, 0, $desde, $hasta, "linear");
+    $slug = Ahorro::slugify($meta_ahorro);
+    echo "slug = ".$slug;
+    $ahorro = new Ahorro($user->id, $meta_ahorro, $slug, $cantidad, $calculo->abono, $periodo, $calculo->intervalo, 0, $desde, $hasta, "linear");
 
     $ahorro->save();
 
@@ -60,12 +61,13 @@ $session->set_message("");
 
 </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 my-form">
-        <form action="index.php"  method="post">
+        <form action="index.php"  method="post" onsubmit="event.preventDefault(); canSubmit();">
             <input type="text" class="form-control my-input" name="meta_ahorro" placeholder="C&oacute;mo se llama tu meta?" /><br>
-            <input type="text" class="form-control my-input" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?" /><br>     
+            <span class="error my_message"></span>
+            <input type="text" class="form-control my-input is-int" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?" /><br>     
 
             <!-- Desde el d&iacute;a: <br> -->
-            <input type="text" class="form-control my-input" name="fecha-inicial" id="date_picker1" placeholder="Desde el d&iacute;a"><br>
+            <input type="text" class="form-control my-input is-int" name="fecha-inicial" id="date_picker1" placeholder="Desde el d&iacute;a"><br>
             <input type="text" class="form-control my-input" name="fecha-final" id="date_picker2" placeholder="Hasta el d&iacute;a"><br>        
 
             <strong>&iquest;Cada cu&aacute;ndo vas a abonar?</strong><br>
@@ -96,7 +98,7 @@ $session->set_message("");
                 </div>
             </div>
 
-            <button class="btn btn-danger submit-button my-btn" type="submit" name="submit">Guardar Meta</button>
+            <button class="btn btn-danger submit-button my-btn" type="submit" name="submit" >Guardar Meta</button>
             <br class="my-clear">
         </form>
     </div>

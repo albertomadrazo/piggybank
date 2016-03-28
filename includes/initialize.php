@@ -26,5 +26,6 @@ require_once(LIB_PATH.DS.'ahorro.php');
 
 // load database-related classes
 require_once(LIB_PATH.DS.'user.php');
+require_once(LIB_PATH.DS.'cita.php');
 
 ?>

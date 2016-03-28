@@ -144,7 +144,7 @@ function getVariablesForTab(tab){
     );
     // console.log("num_de_intervalos = " + num_de_intervalos);
     var deuda = 0;
-    var intervalo_actual = (Tiempo.cantidad_de_intervalos(tab['fecha_inicial'], hoy, tab['intervalo']));
+    var intervalo_actual = (Tiempo.cantidad_de_intervalos(tab['fecha_inicial'], hoy, tab['intervalo'])+1);
     var intervalos_faltantes = num_de_intervalos - intervalo_actual;
     var cantidad_faltante = tab['total'] - tab['ahorro_parcial'];
 
@@ -208,6 +208,7 @@ $(function(){
 
     $('#una_parte').change(function(){
         $('#abonar_todo').attr('checked', false);
+        console.log("Que pasa chingaos");
 
         if($('#una_parte_cantidad').attr('name') == 'abono'){
             $('#una_parte_cantidad').removeAttr('name');
@@ -222,6 +223,7 @@ $(function(){
     $.post("goal_tables.php", {user_id: $('#user-id').html()},function(data){
 
         var data = JSON.parse(data);
+
         var metas_tabs = '';
         var metas = '';
 

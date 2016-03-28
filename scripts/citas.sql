@@ -1,7 +1,7 @@
 CREATE TABLE citas(
-    id VARCHAR(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) NOT NULL DEFAULT 1,
     texto VARCHAR (500) NOT NULL,
-    user_id INT(11) NOT NULL,
     autor VARCHAR(50) NOT NULL DEFAULT 'Anónimo',
-    FOREING KEY (user_id) REFERENCES users (id)
+    FOREIGN KEY (user_id) REFERENCES users (id)
 )

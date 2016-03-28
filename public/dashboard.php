@@ -10,7 +10,7 @@
             if(isset($session->user_id)){
                 $user = User::find_by_id($session->user_id);        
 
-                echo "<div style=\"visibility:hidden\"id=\"user-id\">{$user->id}</div>";        
+                echo "<div style=\"visibility:hidden\" id=\"user-id\">{$user->id}</div>";        
 
                 if($user){
 
@@ -19,7 +19,7 @@
                         $session->set_message("Escribe una meta de ahorro.");
                         redirect_to("index.php");
                     }
-                    
+
                     echo "<strong>Hola {$user->username}</strong><br>";
                     $user_savings = Ahorro::get_by_user_id($user->id);
                     $goal = array();
@@ -38,12 +38,13 @@
             ?>
 
             <h3>&iquest;Cu&aacute;nto deseas depositar?</h3>
-            <form action="abonado.php" method="post">
-                <input type="hidden" id="hidden-meta_de_ahorro" name="meta_de_ahorro" value="">
+            <form action="abonado.php" method="post" onsubmit="canSubmit();">
+                <input type="hidden" class="is-int" id="hidden-meta_de_ahorro" name="meta_de_ahorro" value="">
                 <input type="checkbox" id="abonar_todo" name="abono" value="">
                             Todo lo que debo ($<span id="tab-deuda"></span>).<br>
                 <input type="checkbox" id="una_parte"> Una parte.
-                <input type="text" id="una_parte_cantidad" class="form-control my-input">
+                <span class="error my_message"></span>
+                <input type="text" id="una_parte_cantidad" class="form-control my-input is-int">
                 <button class="btn btn-danger submit-button">Ahorrar!</button>
             </form>
         </div>
