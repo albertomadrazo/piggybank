@@ -175,10 +175,11 @@ div.ui-datepicker{ font-size:20px; }
 
 .nav-tabs > li.active > a{
     background-color: #9ED868;  
+    color: #000 !important;
 }
 
 .nav-tabs > li > a{
-    color:#000 !important;
+    color:#fff !important;
 }
 
 .nav-tabs{
