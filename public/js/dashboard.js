@@ -189,7 +189,7 @@ function getVariablesForTab(tab){
     // en la tabla actual
 
     // El nombre de la tabla (no slug)
-    $('#tab-meta_de_ahorro').html(tab['meta_de_ahorro']);
+    $('#tab-meta_de_ahorro').html(tab['slug']);
     // junto al checkbox de "todo lo que debo". Lado izquierdo
     // TODO: Este no esta funcionando
     $('#tab-deuda').html(deuda);
@@ -219,7 +219,7 @@ function getVariablesForTab(tab){
 
 
 var valores_de_meta = {
-    'user_id':'', 'meta_de_ahorro': '', 'total': '',
+    'user_id':'', 'meta_de_ahorro': '', 'slug': '', 'total': '',
     'cantidad_a_abonar': '', 'periodo': '', 'intervalo': '',
     'ahorro_parcial': '', 'fecha_inicial': '',
     'fecha_final': '', 'tipo_de_ahorro': ''
@@ -256,8 +256,8 @@ $(function(){
         var metas = '';
 
         for(var i= 0; i < data.length; i++){
-            metas_tabs += '<li><a data-toggle="tab" href="#'+data[i]['meta_de_ahorro']+'">'+ data[i]['meta_de_ahorro']+'</a></li>';
-            metas += '<div id="'+data[i]['meta_de_ahorro']+'" class="tab-pane fade">';
+            metas_tabs += '<li><a data-toggle="tab" href="#'+data[i]['slug']+'">'+ data[i]['slug']+'</a></li>';
+            metas += '<div id="'+data[i]['slug']+'" class="tab-pane fade">';
 
             for(var key in data[i]){
                 if(i === 0){
@@ -284,7 +284,8 @@ $(function(){
         if($("#metas").has("div").length){
             $("div#metas").children("div").each(function(index){
                 $(this).children("p").each(function(index){
-                    valores_de_meta[$(this).html()] 
+                    
+                    valores_de_meta[$(this).html()] ///// HERE!!!!! ////
                 });
             });
         } else{
