@@ -1,9 +1,12 @@
+// Closure para procesar las variables que me da la base de datos
+// TODO: cambiarle el nombre porque no solo hay funciones relativas
+// al tiempo, sino calculos matematicos
 var Tiempo = (function(){
-    var intervalo;
-    var intervalo_en_texto;
-    var ahorro_parcial;
-    var cantidad_a_abonar;
 
+    var intervalo; // Cada cuantos dias se tiene que abonar
+    var intervalo_en_texto;
+    var ahorro_parcial; // Cuantos ahorros se han acumulado
+    var cantidad_a_abonar;
 
     set_ahorro_parcial = function(cantidad){
         ahorro_parcial = cantidad;
@@ -21,16 +24,19 @@ var Tiempo = (function(){
         return cantidad_a_abonar;
     }
 
+    // convierte los dias en timestamp. Un dia tiene 86400 segundos
     dia = function(dias){
         return (parseInt(dias) * 86400);
     };
 
+    // retorna una fecha con formato YYYY-MM-DD a partir del timestamp
     fecha_de_hoy = function(){
         var fecha = Math.floor(Date.now());
         return fecha.getFullYear()+"-"+(fecha.getMonth()+ 1)+"-"+fecha.getDate();
 
     };
 
+    // convierte un timestamp a fecha con formate YYYY-MM-DD
     timestamp_to_date = function(timestamp){
         timestamp = new Date(timestamp*1000);
         var result =timestamp.getFullYear()+"-"+
@@ -39,18 +45,15 @@ var Tiempo = (function(){
         "-"+timestamp.getDate();
         return result;
     }
+
     // Convierte la fecha en string al formato
     // que necesito 'YYYY-MM-DD'
     my_strtotime = function(fecha){
-        // var fecha = new Date(fecha);
         return Date.parse(fecha)/1000;
-        // return fecha;
-        // return fecha.getFullYear()+"-"+(fecha.getMonth()+ 1)+"-"+fecha.getDate();
-
     }
 
+    // convierte el numero de dias en texto. ejemplo: 7 => "semana"
     convertir_intervalo_a_texto = function(intervalo){
-        // var intervalo_en_texto;
 
         switch(intervalo){
             case 1:
@@ -73,6 +76,7 @@ var Tiempo = (function(){
     };
 
     // pendiente, no se para que sirva
+    // eliminarla
     calcular_periodo = function(desde, hasta){
         stamp_desde = Math.round(new Date(desde).getTime()/1000);
         stamp_hasta = Math.round(new Date(hasta).getTime()/1000);
@@ -82,6 +86,9 @@ var Tiempo = (function(){
         return days;
     };
 
+    // retorna la cantidad de intervalos entre dos fechas.
+    // Ejemplo: 2016-03-20 a 2017-03-20 y el intervalo es 7, regresa 52,
+    // si es 30, regresa 12
     cantidad_de_intervalos = function(fecha_inicial, fecha_final, intervalo){
         fecha_inicial = Math.round(new Date(fecha_inicial).getTime()/1000);
         fecha_final = Math.round(new Date(fecha_final).getTime()/1000);
@@ -89,21 +96,15 @@ var Tiempo = (function(){
         return parseInt((fecha_final - fecha_inicial) / dia(intervalo));
     };
 
+    // si han pasado n(intervalo) dias entre dos fechas, retorna true,
+    // si no, retorna false
     plazo_vencido = function(fecha_inicial, intervalo){
         var oneDay = 24*60*60*1000;
         var hoy = my_strtotime(new Date());
-        // var hoy = Math.round(moment().add(5, 'days')/1000);
         var fecha_inicial = my_strtotime(fecha_inicial);
         var dias_transcurridos = Math.round((hoy - fecha_inicial)/86400);
         var b = dias_transcurridos / intervalo;
-        // console.log("----");
-        // console.log((dias_transcurridos));
-        // console.log(hoy +" " +fecha_inicial);
-        // console.log((get_ahorro_parcial()/get_cantidad_a_abonar()));
         var abonos_al_corriente = get_cantidad_a_abonar() * dias_transcurridos;
-        // console.log("cantidad_a_abonar="+(cantidad_a_abonar));
-        // console.log("abonos_al_corriente="+(abonos_al_corriente));
-        // console.log("ahorro_parcial="+(get_ahorro_parcial()));
         if((b / intervalo < 1) || (get_ahorro_parcial() >= abonos_al_corriente)){
             // console.log("No ha vencido");
             return false;
@@ -113,21 +114,22 @@ var Tiempo = (function(){
             // console.log("Ya venció");
         } else{
 
-            console.log("Aqui");
+            console.log("Algo anda mal con esta función");
         }
     }
 
     return {
+        set_ahorro_parcial:          set_ahorro_parcial,
+        get_ahorro_parcial:          get_ahorro_parcial,    
+        set_cantidad_a_abonar:       set_cantidad_a_abonar,
+        get_cantidad_a_abonar:       get_cantidad_a_abonar,
         dia:                         dia,
         fecha_de_hoy:                fecha_de_hoy,
         timestamp_to_date:           timestamp_to_date,
+        my_strtotime:                my_strtotime,
         convertir_intervalo_a_texto: convertir_intervalo_a_texto,
         cantidad_de_intervalos:      cantidad_de_intervalos,
         plazo_vencido:               plazo_vencido,
-        my_strtotime:                my_strtotime,
-        set_ahorro_parcial:          set_ahorro_parcial,
-        set_cantidad_a_abonar:       set_cantidad_a_abonar,
-        get_ahorro_parcial:          get_ahorro_parcial,    
     }
 })();
 
