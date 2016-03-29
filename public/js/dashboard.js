@@ -31,9 +31,10 @@ var Tiempo = (function(){
 
     // retorna una fecha con formato YYYY-MM-DD a partir del timestamp
     fecha_de_hoy = function(){
-        var fecha = Math.floor(Date.now());
-        return fecha.getFullYear()+"-"+(fecha.getMonth()+ 1)+"-"+fecha.getDate();
-
+        var fecha = new Date();
+        return fecha.getFullYear()+"-"+
+                (append_0_if_needed(fecha.getMonth()+ 1))+"-"+
+                (append_0_if_needed(fecha.getDate()));
     };
 
     // convierte un timestamp a fecha con formate YYYY-MM-DD
@@ -46,6 +47,15 @@ var Tiempo = (function(){
         return result;
     }
 
+    // le pone un 0 al numero si es menor de 10, para que sea una fecha valida
+    append_0_if_needed = function(numero){
+        var numero = parseInt(numero);
+        if(numero > 0 && numero < 10){
+            return "0"+numero;
+        } else{
+            return numero;
+        }
+    }
     // Convierte la fecha en string al formato
     // que necesito 'YYYY-MM-DD'
     my_strtotime = function(fecha){
@@ -133,7 +143,9 @@ var Tiempo = (function(){
     }
 })();
 
-
+// corre cuando se cambia de meta (los tabs)
+// cambia los valores de la tabla de informacion y da las cantidades a
+// abonar
 function getVariablesForTab(tab){
 
     Tiempo.set_ahorro_parcial(tab['ahorro_parcial']);
