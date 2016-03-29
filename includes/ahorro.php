@@ -101,12 +101,11 @@ class Ahorro extends DatabaseObject {
         }
     }
 
-    public static function update_savings($abono, $identifier){
+    public static function update_savings($abono, $slug, $id){
         global $database;
         $sql = "UPDATE ahorro SET ahorro_parcial=";
-        // $sql .= join(", " $args_array);
         $sql .= $abono;
-        $sql .= " WHERE meta_de_ahorro='".$identifier."'";
+        $sql .= " WHERE slug='".$slug."' AND user_id='".$id."'";
 
 
         $database->query($sql);

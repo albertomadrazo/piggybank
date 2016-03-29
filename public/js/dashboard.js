@@ -56,6 +56,7 @@ var Tiempo = (function(){
             return numero;
         }
     }
+
     // Convierte la fecha en string al formato
     // que necesito 'YYYY-MM-DD'
     my_strtotime = function(fecha){
@@ -150,23 +151,23 @@ function getVariablesForTab(tab){
 
     Tiempo.set_ahorro_parcial(tab['ahorro_parcial']);
     Tiempo.set_cantidad_a_abonar(tab['cantidad_a_abonar']);
-    var hoy = moment().format('YYYY-MM-DD');
+    var hoy = Tiempo.fecha_de_hoy();
     var num_de_intervalos = Tiempo.cantidad_de_intervalos(
         tab['fecha_inicial'],
         tab['fecha_final'],
         tab['intervalo']
     );
-    // console.log("num_de_intervalos = " + num_de_intervalos);
     var deuda = 0;
-    var intervalo_actual = (Tiempo.cantidad_de_intervalos(tab['fecha_inicial'], hoy, tab['intervalo'])+1);
+    var intervalo_actual = (Tiempo.cantidad_de_intervalos(
+            tab['fecha_inicial'], hoy, tab['intervalo']) + 1 // TODO: checar este +1
+    );
     var intervalos_faltantes = num_de_intervalos - intervalo_actual;
     var cantidad_faltante = tab['total'] - tab['ahorro_parcial'];
-
     // Calcula el tiempo desde el inicio hasta el ultimo intervalo
-    var ultimo_intervalo = my_strtotime(tab['fecha_inicial']) + (Tiempo.dia(tab['intervalo']));
-
-    var vinci = Tiempo.plazo_vencido(tab['fecha_inicial'],tab['intervalo']);
-    if(!vinci){
+    var ultimo_intervalo = Tiempo.my_strtotime(tab['fecha_inicial']) + (Tiempo.dia(tab['intervalo']));
+    var plazo_vencido = Tiempo.plazo_vencido(tab['fecha_inicial'],tab['intervalo']);
+    
+    if(!plazo_vencido){
         $('#al_dia').html("Estás al día.");
     } else{
         $('#al_dia').html("Es hora de ahorrar.");
@@ -174,6 +175,7 @@ function getVariablesForTab(tab){
 
     var abonos_al_corriente = tab['cantidad_a_abonar'] * intervalo_actual;
 
+    // Calcula la cantidad de deuda
     if(parseInt(tab['ahorro_parcial']) >= parseInt(abonos_al_corriente)){
         deuda = abonos_al_corriente;
         if(deuda > cantidad_faltante){
@@ -182,15 +184,26 @@ function getVariablesForTab(tab){
     } else{
         deuda = parseInt(tab['cantidad_a_abonar']) + (abonos_al_corriente - tab['ahorro_parcial']);
     }
+
+    // Aqui es donde llena todos los campos de la tabla informativa y de la cantidad que se debe
+    // en la tabla actual
+
+    // El nombre de la tabla (no slug)
     $('#tab-meta_de_ahorro').html(tab['meta_de_ahorro']);
+    // junto al checkbox de "todo lo que debo". Lado izquierdo
+    // TODO: Este no esta funcionando
     $('#tab-deuda').html(deuda);
+    // El indicador del intervalo "mes", "año"...
     $('#tab-intervalo_a_texto').html(Tiempo.convertir_intervalo_a_texto(parseInt(tab['intervalo'])));
+    // El indicador de que intervalo va
     $('#tab-intervalo_actual').html(intervalo_actual);
     $('#tab-intervalos_faltantes').html(intervalos_faltantes);
     $('#tab-ahorro_parcial').html(tab['ahorro_parcial']);
     $('#tab-cantidad_faltante').html(cantidad_faltante);
 
-    $('#hidden-meta_de_ahorro').val(tab['meta_de_ahorro']);
+    // Campo escondido para enviar el nombre de la meta, debe ser slug
+    $('#hidden-meta_de_ahorro').val(tab['slug']);
+
     $('#hidden-abonar_todo').val(deuda);
     return {
         hoy                 : hoy,
@@ -217,6 +230,7 @@ $(function(){
 
     $('#abonar_todo').change(function(){
         $('#una_parte').attr('checked', false);
+        $('#una_parte_cantidad').val("");
         $('#una_parte_cantidad').css('visibility', 'hidden');
     });
 
@@ -224,11 +238,11 @@ $(function(){
         $('#abonar_todo').attr('checked', false);
         console.log("Que pasa chingaos");
 
-        if($('#una_parte_cantidad').attr('name') == 'abono'){
-            $('#una_parte_cantidad').removeAttr('name');
-        } else{
-            $('#una_parte_cantidad').attr('name', 'abono');
-        }
+        // if($('#una_parte_cantidad').attr('name') == 'abono'){
+        //     $('#una_parte_cantidad').removeAttr('name');
+        // } else{
+        //     $('#una_parte_cantidad').attr('name', 'abono');
+        // }
 
         toggleVisible('#una_parte_cantidad');
     });

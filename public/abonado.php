@@ -5,43 +5,36 @@
 if(isset($session->user_id)){
     $user = User::find_by_id($session->user_id);
     echo $user->username."<br>";
-    print_r($_SESSION);
+    echo $user->id."<br>";
     output_message($session->get_message());
     if(isset($_POST)){
-        // print_r($_POST);
+        print_r($_POST);
     }
 
     $sql = "SELECT * FROM ahorro WHERE user_id ='";
     $sql .= $user->id;
-    $sql .= "' AND meta_de_ahorro='";
-    // $sql .= "' AND slug='";
+    $sql .= "' AND slug='";
     $sql .= $_POST['meta_de_ahorro']."'";
-    // $sql .= $_POST['slug']."'";
 
     $user_savings = Ahorro::find_by_sql($sql);
 
-    // print_r($user_savings);
+    if(!empty($_POST['abonar_parte'])){
+        echo "true<br>";
+        echo $_POST['abonar_parte']."<br>";
+        $abono = $_POST['abonar_parte'];
+    } else{
+        echo "Vergas";
+        echo "false<br>".$_POST['abonar_todo']."<br>";
+        echo gettype($_POST['abonar_parte'])."<br>";
 
-    // foreach($user_savings[0] as $key=>$value){
-    //     echo "###<br>";
-    //     // echo $key;
-    //     echo $key." = ".$value;   
-    //     // print_r($value);
-    //     echo "###<br>";
-    // }
-    $suma = $user_savings[0]['ahorro_parcial'] + $_POST['abono'];
+        $abono = (int)$_POST['abonar_todo'];
+    }
+
+    echo "<br>abono = ".$abono."<br>";
+    $suma = $user_savings[0]['ahorro_parcial'] + $abono;
     echo"<hr>";
-    // $args_array = array();
-    // foreach($_POST as $key => $value){
-    //     if($key == 'abono' && $key == 'meta_de_ahorro'){
-    //         $args_array[] = $key => $value;
-    //     }
-    // }
 
-    // llamar ahorro parcial y sumarle el abono
-
-
-    Ahorro::update_savings($suma, $_POST['meta_de_ahorro'] );
+    Ahorro::update_savings($suma, $_POST['meta_de_ahorro'], $user->id );
 }
 
 ?>
