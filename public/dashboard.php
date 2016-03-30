@@ -43,7 +43,7 @@
 
             <h3>&iquest;Cu&aacute;nto deseas depositar?</h3>
             <form action="abonado.php" method="post" onsubmit="canSubmit();">
-                <input type="hidden" class="is-int" id="hidden-meta_de_ahorro" name="meta_de_ahorro" value="">
+                <input type="hidden" class="is-int" id="hidden-meta_de_ahorro" name="slug" value="">
                 <input type="checkbox" id="abonar_todo">
                 <input type="hidden" id="hidden-abonar_todo" name="abonar_todo" value="0">
                             <label for="abonar_todo">Todo lo que debo ($<span id="tab-deuda"></span>).</label><br>

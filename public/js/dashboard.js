@@ -225,28 +225,7 @@ var valores_de_meta = {
     'fecha_final': '', 'tipo_de_ahorro': ''
 };
 
-
-$(function(){
-
-    $('#abonar_todo').change(function(){
-        $('#una_parte').attr('checked', false);
-        $('#una_parte_cantidad').val("");
-        $('#una_parte_cantidad').css('visibility', 'hidden');
-    });
-
-    $('#una_parte').change(function(){
-        $('#abonar_todo').attr('checked', false);
-        console.log("Que pasa chingaos");
-
-        // if($('#una_parte_cantidad').attr('name') == 'abono'){
-        //     $('#una_parte_cantidad').removeAttr('name');
-        // } else{
-        //     $('#una_parte_cantidad').attr('name', 'abono');
-        // }
-
-        toggleVisible('#una_parte_cantidad');
-    });
-
+function elAjax(){
     // AJAX para obtener las tablas de metas de una manera mas limpia
     $.post("goal_tables.php", {user_id: $('#user-id').html()},function(data){
 
@@ -256,7 +235,7 @@ $(function(){
         var metas = '';
 
         for(var i= 0; i < data.length; i++){
-            metas_tabs += '<li><a data-toggle="tab" href="#'+data[i]['slug']+'">'+ data[i]['slug']+'</a></li>';
+            metas_tabs += '<li><a data-toggle="tab" data-nombre_meta="'+data[i]['slug']+'" href="#'+data[i]['slug']+'">'+ data[i]['meta_de_ahorro']+'</a></li>';
             metas += '<div id="'+data[i]['slug']+'" class="tab-pane fade">';
 
             for(var key in data[i]){
@@ -276,24 +255,10 @@ $(function(){
         $('#metas_tabs').append(metas_tabs);
         $('#metas').append(metas);
 
-        // $('#metas div:first').addClass('in');
-        // $('#metas div:first').addClass('active');
-
         $('#metas_tabs li:first').addClass('active');
 
-        if($("#metas").has("div").length){
-            $("div#metas").children("div").each(function(index){
-                $(this).children("p").each(function(index){
-                    
-                    valores_de_meta[$(this).html()] ///// HERE!!!!! ////
-                });
-            });
-        } else{
-            console.log("No div present in the DOM");
-        }
-
         $("#metas_tabs > li").on('click', function(){
-            var meta_values = $(this).find('a').html();
+            var meta_values = $(this).find('a').attr('data-nombre_meta');
 
             $('#metas').children('div#'+meta_values).each(function(index){
                 $(this).children('p').each(function(index2){
@@ -307,4 +272,22 @@ $(function(){
 
         });
     });
+}
+
+$(function(){
+
+    $('#abonar_todo').change(function(){
+        $('#una_parte').attr('checked', false);
+        $('#una_parte_cantidad').val("");
+        $('#una_parte_cantidad').css('visibility', 'hidden');
+    });
+
+    $('#una_parte').change(function(){
+        $('#abonar_todo').attr('checked', false);
+        console.log("Que pasa chingaos");
+
+        toggleVisible('#una_parte_cantidad');
+    });
+
+    elAjax();
 });
