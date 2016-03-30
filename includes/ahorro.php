@@ -112,6 +112,14 @@ class Ahorro extends DatabaseObject {
         return ($database->affected_rows() == 1) ? true : false;
     }
 
+    public static function delete_goal($id, $slug){
+        global $database;
+        $sql = "DELETE FROM ahorro WHERE user_id='".$id."' AND slug='".$slug."'";
+        $database->query($sql);
+
+        return ($database->affected_rows() == 1) ? true : false;
+    }
+
     public function giveVariablesForTab($id){
         $user_savings = self::get_by_user_id($id);
         $goal = array();

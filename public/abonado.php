@@ -8,6 +8,7 @@ if(isset($session->user_id) && isset($_POST)){
     // echo $user->id."<br>";
     output_message($session->get_message());
 
+    // Obtener el row para sacarle unos datos y poder actualizar de acuerdo
     $sql = "SELECT * FROM ahorro WHERE user_id ='";
     $sql .= $user->id;
     $sql .= "' AND slug='";

@@ -281,7 +281,7 @@ function getVariablesForTab(tab){
     // en la tabla actual
 
     // El nombre de la tabla (no slug)
-    $('#tab-meta_de_ahorro').html(tab['slug']);
+    $('#tab-meta_de_ahorro').html(tab['meta_de_ahorro']);
     // junto al checkbox de "todo lo que debo". Lado izquierdo
     // TODO: Este no esta funcionando
     $('#tab-deuda').html(deuda);
