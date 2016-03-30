@@ -22,21 +22,18 @@
                     }
 
                     echo "<strong>Hola {$user->full_name}</strong>";
-                    $om = output_message($session->get_message());
-                    echo $om;
+                        $om = output_message($session->get_message());
+                        $session->set_message(" ");
+                        echo $om;
                     "<br>";
                     $user_savings = Ahorro::get_by_user_id($user->id);
                     $goal = array();
-                    echo '<span id="al_dia"></span>';
-
-
+                    echo '<br><span id="al_dia"></span>';
 
                 } else{
-                    // $session->set_message("Vayanse a la verga!");
                     redirect_to("login.php");
                 }
             } else{
-                // $session->set_message("Vayanse a la verga 2");
                 redirect_to("login.php");
             }
             ?>

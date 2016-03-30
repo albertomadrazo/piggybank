@@ -36,14 +36,16 @@ class Session{
     }
 
     public function set_message($msg=""){
-        if(!empty($msg)){
-            // then this is  "set message"
-            // make sure you understand why $this->message=$msg wouldn't work
-            $_SESSION['message'] = $msg;
-        } else{
-            // then this is "get message"
-            $_SESSION['message'] = $this->message;
-        }
+        
+        $_SESSION['message'] = $msg;
+        // if(!empty($msg)){
+        //     // then this is  "set message"
+        //     // make sure you understand why $this->message=$msg wouldn't work
+        //     $_SESSION['message'] = $msg;
+        // } else{
+        //     // then this is "get message"
+        //     $_SESSION['message'] = $msg; //$this->message;
+        // }
     }
 
     public function get_message(){
