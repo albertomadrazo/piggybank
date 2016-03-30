@@ -43,12 +43,13 @@
 
             <h3>&iquest;Cu&aacute;nto deseas depositar?</h3>
             <form action="abonado.php" method="post" onsubmit="canSubmit();">
-                <input type="hidden" class="is-int" id="hidden-meta_de_ahorro" name="meta_de_ahorro" value="">
-                <input type="checkbox" id="abonar_todo" name="abono" value="">
+                <input type="hidden" class="is-int" id="hidden-meta_de_ahorro" name="slug" value="">
+                <input type="checkbox" id="abonar_todo">
+                <input type="hidden" id="hidden-abonar_todo" name="abonar_todo" value="0">
                             <label for="abonar_todo">Todo lo que debo ($<span id="tab-deuda"></span>).</label><br>
                 <input type="checkbox" id="una_parte"> <label for="una_parte">Una parte.</label>
                 <span class="error my_message"></span>
-                <input type="text" id="una_parte_cantidad" class="form-control my-input is-int">
+                <input type="text" id="una_parte_cantidad" class="form-control my-input is-int" name="abonar_parte">
                 <button class="btn btn-danger submit-button">Ahorrar!</button>
             </form>
         </div>

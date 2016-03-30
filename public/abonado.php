@@ -2,44 +2,44 @@
 <?php include_layout_template("header.php"); ?>
 
 <?php
-if(isset($session->user_id)){
+if(isset($session->user_id) && isset($_POST)){
     $user = User::find_by_id($session->user_id);
-    echo $user->username."<br>";
-    print_r($_SESSION);
+    // echo "<h3>Gracias ".$user->get_name_in_array()[0]."</h3><br>";
+    // echo $user->id."<br>";
     output_message($session->get_message());
-    if(isset($_POST)){
-        // print_r($_POST);
-    }
 
     $sql = "SELECT * FROM ahorro WHERE user_id ='";
     $sql .= $user->id;
-    $sql .= "' AND meta_de_ahorro='";
-    $sql .= $_POST['meta_de_ahorro']."'";
+    $sql .= "' AND slug='";
+    $sql .= $_POST['slug']."'";
 
     $user_savings = Ahorro::find_by_sql($sql);
 
     // print_r($user_savings);
 
-    // foreach($user_savings[0] as $key=>$value){
-    //     echo "###<br>";
-    //     // echo $key;
-    //     echo $key." = ".$value;   
-    //     // print_r($value);
-    //     echo "###<br>";
-    // }
-    $suma = $user_savings[0]['ahorro_parcial'] + $_POST['abono'];
-    echo"<hr>";
-    // $args_array = array();
-    // foreach($_POST as $key => $value){
-    //     if($key == 'abono' && $key == 'meta_de_ahorro'){
-    //         $args_array[] = $key => $value;
-    //     }
-    // }
+    if(!empty($_POST['abonar_parte'])){
+        $abono = $_POST['abonar_parte'];
+    } else{
+        $abono = (int)$_POST['abonar_todo'];
+    }
 
-    // llamar ahorro parcial y sumarle el abono
+    echo $user_savings[0]['meta_de_ahorro']."<br>";
+    $suma = $user_savings[0]['ahorro_parcial'] + $abono;
 
-
-    Ahorro::update_savings($suma, $_POST['meta_de_ahorro'] );
+    Ahorro::update_savings($suma, $_POST['slug'], $user->id );
+} else{
+    redirect_to("signin.php");
 }
 
 ?>
+
+<div class="container-fluid">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-2">
+            <h3>Gracias <?php echo $user->get_name_in_array()[0]; ?>.</h3><br>
+            <p>Has abonado <?php echo $abono; ?> a tu meta de <?php echo $user_savings[0]['meta_de_ahorro']; ?></p>
+            <!-- <div class="btn-group" role="group" aria-label="..."> -->
+                <a href=\"dashboard.php\" class="btn btn-default">Seguir ahorrando</a>
+                <a href=\"dashboard.php\" class="btn btn-default">Salir</a>
+            <!-- </div> -->
+    </div>
+</div>

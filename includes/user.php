@@ -20,6 +20,11 @@ class User extends DatabaseObject{
         }
     }
 
+    public function get_name_in_array(){
+        // var $separated_name = [];
+        return explode(" ", $this->full_name);
+    }
+
     public static function authenticate($username="", $password=""){
         global $database;
         $username = $database->escape_value($username);
