@@ -76,7 +76,7 @@
             </div>
         </div>
         <form method="post" action="delete.php">
-            <button class="btn btn-default submit-button" id="hidden-meta_de_ahorro" name="slug" value="">Eliminar</button>
+            <button class="btn btn-default submit-button btn-lg delete-btn" id="hidden-meta_de_ahorro" name="slug" value="">Eliminar <span class="glyphicon glyphicon-remove-sign"></span></button>
         </form>
     </div>
 

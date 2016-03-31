@@ -206,3 +206,21 @@ div.ui-datepicker{ font-size:20px; }
 .message, .field-to-update{
     color: #bc1339;
 }
+
+.glyphicon{
+    font-size: 30px;
+    vertical-align: middle;
+    color: #fff;
+}
+
+.delete-btn{
+    font-weight: bolder;
+    text-transform: uppercase;
+    background-color: orange;
+    color: #000;
+}
+
+.delete-btn:hover{
+    font-weight: bolder;
+    background-color: #fcb250;
+}
