@@ -38,12 +38,10 @@ $(document).ready(function(){
             return true;
         }
 
-        // console.log(is_number);
     });
 
-    $('#date_picker1').datepicker({dateFormat: "yy-mm-dd"});
-    $('#date_picker2').datepicker({dateFormat: "yy-mm-dd"});
-
+    $('.date_picker1').datepicker({dateFormat: "yy-mm-dd"});
+    $('.date_picker2').datepicker({dateFormat: "yy-mm-dd"});
 
     // Validate fields for signup.php and signin.php
     $('#signup-form').validate({
@@ -160,7 +158,7 @@ var Tiempo = (function(){
 
         switch(intervalo){
             case 1:
-                intervalo_en_texto = "diario";
+                intervalo_en_texto = "dia";
                 break;
             case 7:
                 intervalo_en_texto = "semana";
@@ -195,7 +193,6 @@ var Tiempo = (function(){
     cantidad_de_intervalos = function(fecha_inicial, fecha_final, intervalo){
         fecha_inicial = Math.round(new Date(fecha_inicial).getTime()/1000);
         fecha_final = Math.round(new Date(fecha_final).getTime()/1000);
-        
         return parseInt((fecha_final - fecha_inicial) / dia(intervalo));
     };
 
