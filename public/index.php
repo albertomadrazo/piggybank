@@ -30,8 +30,6 @@ if(isset($_POST['submit'])){
     $slug = Ahorro::slugify($meta_ahorro);
     echo "slug = ".$slug;
 
-    ///////////////////////7
-
     $ahorro = new Ahorro($user->id, $meta_ahorro, $slug, $cantidad, $calculo->abono, $periodo, $calculo->intervalo, 0, $desde, $hasta, "linear");
 
     $ahorro->save();
@@ -81,9 +79,8 @@ $session->set_message("");
             <span class="error my_message"></span>
             <input type="text" class="form-control my-input is-int" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?" /><br>     
 
-            <!-- Desde el d&iacute;a: <br> -->
-            <input type="text" class="form-control my-input is-int" name="fecha-inicial" id="date_picker1" placeholder="Desde el d&iacute;a"><br>
-            <input type="text" class="form-control my-input" name="fecha-final" id="date_picker2" placeholder="Hasta el d&iacute;a"><br>        
+            <input type="text" class="form-control my-input is-int date_picker1" name="fecha-inicial" placeholder="Desde el d&iacute;a"><br>
+            <input type="text" class="form-control my-input date_picker2" name="fecha-final" placeholder="Hasta el d&iacute;a"><br>        
 
             <strong>&iquest;Cada cu&aacute;ndo vas a abonar?</strong><br>
             <div class="row">

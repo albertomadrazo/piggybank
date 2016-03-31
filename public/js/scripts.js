@@ -41,8 +41,8 @@ $(document).ready(function(){
         // console.log(is_number);
     });
 
-    $('.date_picker1').datepicker({dateFormat: "yy-mm-dd"});
-    $('.date_picker2').datepicker({dateFormat: "yy-mm-dd"});
+    $('#date_picker1').datepicker({dateFormat: "yy-mm-dd"});
+    $('#date_picker2').datepicker({dateFormat: "yy-mm-dd"});
 
 
     // Validate fields for signup.php and signin.php
@@ -281,7 +281,7 @@ function getVariablesForTab(tab){
     // en la tabla actual
 
     // El nombre de la tabla (no slug)
-    $('#tab-meta_de_ahorro').html(tab['meta_de_ahorro']);
+    $('#tab-meta_de_ahorro').html(tab['slug']);
     // junto al checkbox de "todo lo que debo". Lado izquierdo
     // TODO: Este no esta funcionando
     $('#tab-deuda').html(deuda);
