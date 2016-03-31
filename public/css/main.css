@@ -201,5 +201,8 @@ div.ui-datepicker{ font-size:20px; }
 
 .message{
     font-weight: bold;
+}
+
+.message, .field-to-update{
     color: #bc1339;
 }

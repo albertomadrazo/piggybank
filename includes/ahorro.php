@@ -101,6 +101,25 @@ class Ahorro extends DatabaseObject {
         }
     }
 
+    public function update($row_slug){
+        global $database;
+        // - UPDATE table SET key='value', key='value' WHERE condition
+        // - single-quotes around all values
+        // - escape all values to prevent SQL injection
+        $attributes = $this->sanitized_attributes();
+        $attribute_pairs = array();
+        foreach($attributes as $key => $value){
+            $attribute_pairs[] = "{$key}='{$value}'";
+        }
+        $sql = "UPDATE ".self::$table_name." SET ";
+        $sql .= join(", ", $attribute_pairs);
+        $sql .= " WHERE slug='".$row_slug;
+        $sql .= "' AND user_id=". $database->escape_value($this->user_id);
+
+        $database->query($sql);
+        return ($database->affected_rows() == 1) ? true : false;
+    }
+
     public static function update_savings($abono, $slug, $id){
         global $database;
         $sql = "UPDATE ahorro SET ahorro_parcial=";

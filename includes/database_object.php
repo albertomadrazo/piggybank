@@ -135,7 +135,7 @@ class DatabaseObject{
         foreach($attributes as $key => $value){
             $attribute_pairs[] = "{$key}='{$value}";
         }
-
+        // echo "-->".self::$table_name."<br>";
         $sql = "UPDATE ".self::$table_name."SET ";
         $sql .= join(", ", $attribute_pairs);
         $sql .= " WHERE id=". $database->escape_value($this->id);

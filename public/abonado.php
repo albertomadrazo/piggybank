@@ -39,8 +39,8 @@ if(isset($session->user_id) && isset($_POST)){
             <h3>Gracias <?php echo $user->get_name_in_array()[0]; ?>.</h3><br>
             <p>Has abonado <?php echo $abono; ?> a tu meta de <?php echo $user_savings[0]['meta_de_ahorro']; ?></p>
             <!-- <div class="btn-group" role="group" aria-label="..."> -->
-                <a href=\"dashboard.php\" class="btn btn-default">Seguir ahorrando</a>
-                <a href=\"dashboard.php\" class="btn btn-default">Salir</a>
+                <a href="dashboard.php" class="btn btn-default">Seguir ahorrando</a>
+                <a href="logout.php" class="btn btn-default">Salir</a>
             <!-- </div> -->
     </div>
 </div>

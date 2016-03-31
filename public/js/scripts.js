@@ -41,8 +41,8 @@ $(document).ready(function(){
         // console.log(is_number);
     });
 
-    $('#date_picker1').datepicker({dateFormat: "yy-mm-dd"});
-    $('#date_picker2').datepicker({dateFormat: "yy-mm-dd"});
+    $('.date_picker1').datepicker({dateFormat: "yy-mm-dd"});
+    $('.date_picker2').datepicker({dateFormat: "yy-mm-dd"});
 
 
     // Validate fields for signup.php and signin.php

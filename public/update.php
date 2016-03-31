@@ -26,20 +26,14 @@ if(isset($_POST['submit'])){
     $calculo = new Calculo($cantidad, $periodo, $intervalo);
     $calculo->linear_savings();
 
-    $tiempo = new Tiempo();
     $slug = Ahorro::slugify($meta_ahorro);
-    echo "slug = ".$slug;
-
-    ///////////////////////7
+    $to_update = $_POST['to_update'];
 
     $ahorro = new Ahorro($user->id, $meta_ahorro, $slug, $cantidad, $calculo->abono, $periodo, $calculo->intervalo, 0, $desde, $hasta, "linear");
 
-    $ahorro->save();
+    $ahorro->update($to_update);
 
-    echo "Intervalo: $" . $calculo->abono . " cada ";
-    echo Tiempo::convertir_intervalo_a_texto($calculo->intervalo);
-    echo ($calculo->residuo > 0) ?" y un abono extra de {$calculo->residuo}" : "";
-    $session->set_message("Has creado la meta {$meta_ahorro}.");
+    $session->set_message("Has actualizado la meta {$meta_ahorro}.");
     redirect_to("dashboard.php");
 } else{
 
@@ -49,18 +43,6 @@ if(isset($_POST['submit'])){
 
     if(!isset($session->user_id)){
         redirect_to("login.php");
-    } else{
-        $user = User::find_by_id($session->user_id);
-
-        $sql = "SELECT * FROM ahorro WHERE user_id='";
-        $sql .= $user->id."'";  
-        $ahorro_fields = Ahorro::find_by_sql($sql);
-        $ahorro_fields = count($ahorro_fields);
-        if($ahorro_fields > 3){
-            $session->set_message("Ya tienes más de 3 metas<br>
-                ¿Quieres <a href=\"delete.php\">borrar</a> una?");
-            redirect_to("dashboard.php");
-        }
     }
 ?>
 
@@ -69,21 +51,42 @@ if(isset($_POST['submit'])){
 <div class="row">
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <?php 
-echo "<span class=\"navbar-brand\"><strong>Hola {$user->full_name}</strong></span>";
-echo "<span class=\"error\">{$session->get_message()}</span>";
-$session->set_message("");
+echo "<span class=\"navbar-brand\"><strong>Actualiza tus metas</span>";
+output_message($session->get_message());
+$session->set_message(" ");
+
 ?>  
 
 </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 my-form">
-        <form action="index.php"  method="post">
-            <input type="text" class="form-control my-input" name="meta_ahorro" placeholder="C&oacute;mo se llama tu meta?" /><br>
-            <span class="error my_message"></span>
-            <input type="text" class="form-control my-input is-int" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?" /><br>     
+    <?php 
+        $user = User::find_by_id($session->user_id);
 
-            <!-- Desde el d&iacute;a: <br> -->
-            <input type="text" class="form-control my-input is-int" name="fecha-inicial" id="date_picker1" placeholder="Desde el d&iacute;a"><br>
-            <input type="text" class="form-control my-input" name="fecha-final" id="date_picker2" placeholder="Hasta el d&iacute;a"><br>        
+        $sql = "SELECT * FROM ahorro WHERE user_id='";
+        $sql .= $user->id."'";  
+
+        $ahorro_fields = Ahorro::find_by_sql($sql);
+
+        echo " <div class=\"btn-group\">";
+        foreach($ahorro_fields as $key){
+            echo "<button type=\"button\" class=\"btn btn-default meta_to_update\">{$key['meta_de_ahorro']}</button>";
+            echo "<input type=\"hidden\" id=\"{$key['slug']}\" ";
+            echo "data-slug=\"{$key['slug']}\" ";
+            echo "data-meta_de_ahorro=\"{$key['meta_de_ahorro']}\" ";
+            echo "data-total=\"{$key['total']}\" ";
+            echo "data-fecha_inicial=\"{$key['fecha_inicial']}\" ";
+            echo "data-fecha_final=\"{$key['fecha_final']}\" ";
+            echo "/>";
+        }
+        echo "</div><br><br>";
+    ?>
+        <form action="update.php"  method="post">
+            <input type="hidden" id="to_update" name="to_update">
+            <input type="text" class="form-control my-input field-to-update" name="meta_ahorro" id="meta_de_ahorro" placeholder="C&oacute;mo se llama tu meta?"/><br>
+            <span class="error my_message"></span>
+            <input type="text" class="form-control my-input is-int field-to-update" id="total" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?"/><br>     
+            <input type="text" class="form-control my-input is-int field-to-update date_picker1" name="fecha-inicial" id="fecha_inicial" placeholder="Desde el d&iacute;a"><br>
+            <input type="text" class="form-control my-input is-int field-to-update date_picker2" name="fecha-final" id="fecha_final" placeholder="Hasta el d&iacute;a"><br>        
 
             <strong>&iquest;Cada cu&aacute;ndo vas a abonar?</strong><br>
             <div class="row">
@@ -113,7 +116,7 @@ $session->set_message("");
                 </div>
             </div>
 
-            <button class="btn btn-danger submit-button my-btn" type="submit" name="submit" >Guardar Meta</button>
+            <button class="btn btn-danger submit-button my-btn" type="submit" name="submit" >Actualiza tu Meta</button>
             <br class="my-clear">
         </form>
     </div>
@@ -140,3 +143,4 @@ $session->set_message("");
 <?php } ?>
 
 <?php include_layout_template("footer.php"); ?>
+<script type="text/javascript" src="js/update.js"></script>
