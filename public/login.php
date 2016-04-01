@@ -13,11 +13,9 @@ if(isset($_POST['submit'])){
         $session->set_message("");
         redirect_to("dashboard.php");
     } else{
-        // print_r($session);
         $message = "Nombre de usuario o contrase&ntilde;a equivocados.";
         $session->set_message($message);
         output_message($session->get_message());
-        // echo $message;
     }
 } else {
     $username = "";
