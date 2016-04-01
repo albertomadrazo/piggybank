@@ -38,7 +38,7 @@ class User extends DatabaseObject{
         return !empty($result_array) ? array_shift($result_array) : false;
     }
 
-    public static function sign_up($username="", $password="", $first_name=""){
+    public static function sign_up($username="", $password="", $full_name="", $email=""){
         global $database;
         $username = $database->escape_value($username);
         $password = $database->escape_value($password);

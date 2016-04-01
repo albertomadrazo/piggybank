@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
     echo Tiempo::convertir_intervalo_a_texto($calculo->intervalo);
     echo ($calculo->residuo > 0) ?" y un abono extra de {$calculo->residuo}" : "";
     $session->set_message("Has creado la meta {$meta_ahorro}.");
-    redirect_to("dashboard.php");
+    // redirect_to("dashboard.php");
 } else{
 
     if(isset($_POST['logout'])){

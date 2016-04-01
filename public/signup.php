@@ -7,15 +7,23 @@ if(isset($_POST['submit'])){
     $full_name = trim($_POST['full_name']);
     $email = trim($_POST['email']);
 
+    // echo $username;
+    // echo $password;
+    // echo $full_name;
+    // echo $email;
+
     $new_user = User::sign_up($username, $password, $full_name, $email);
+
     if($new_user){
-        $session->login($username);
+        $authenticate = User::authenticate($username, $password);
+        $session->login($authenticate);
+        
+        $session->set_message("Hola {$authenticate->get_name_in_array()[0]}, bienvenido.");
         redirect_to("index.php");
-        // $message = "Hola {$username}, bienvenido.";
     } else{
         // TODO: Hacer una buena validacion
         echo "Carajo";
-        $message = "Este nombre de usuario ya fue tomado, elige otro.";
+        $session->set_message("Este nombre de usuario ya fue tomado, elige otro.");
     }
 } else{
     $username = "";

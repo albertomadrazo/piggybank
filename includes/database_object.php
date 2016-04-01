@@ -140,8 +140,8 @@ class DatabaseObject{
         $sql .= join(", ", $attribute_pairs);
         $sql .= " WHERE id=". $database->escape_value($this->id);
 
-        $database->query($sql);
-        return ($database->affected_rows() == 1) ? true : false;
+        $query = $database->query($sql);
+        return ($database->affected_rows($query) == 1) ? true : false;
     }
 
     public function delete(){
@@ -152,8 +152,8 @@ class DatabaseObject{
         $sql = "DELETE FROM ".self::$table_name;
         $sql .= " WHERE id=". $database->escape_value($this->id);
         $sql .= " LIMIT 1";
-        $database->query($sql);
-        return ($database->affected_rows() == 1) ? true : false;
+        $query = $database->query($sql);
+        return ($database->affected_rows($query) == 1) ? true : false;
     }
 }
 

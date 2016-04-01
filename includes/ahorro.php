@@ -50,7 +50,7 @@ class Ahorro extends DatabaseObject {
         $sql = "SELECT * FROM ahorro WHERE user_id = " . $id;
         $result = static::find_by_sql_without_instantiation($sql);
 
-        while($row = mysqli_fetch_assoc($result)){
+        while($row = pg_fetch_assoc($result)){
             array_push($metas_array, $row);
         }
 
@@ -62,7 +62,7 @@ class Ahorro extends DatabaseObject {
 
         $result = static::find_by_sql_without_instantiation($sql);
 
-        while($row = mysqli_fetch_assoc($result)){
+        while($row = pg_fetch_assoc($result)){
             $sql_array[] = $row;
         }
 
@@ -116,8 +116,8 @@ class Ahorro extends DatabaseObject {
         $sql .= " WHERE slug='".$row_slug;
         $sql .= "' AND user_id=". $database->escape_value($this->user_id);
 
-        $database->query($sql);
-        return ($database->affected_rows() == 1) ? true : false;
+        $query = $database->query($sql);
+        return ($database->affected_rows($query) == 1) ? true : false;
     }
 
     public static function update_savings($abono, $slug, $id){
@@ -126,17 +126,16 @@ class Ahorro extends DatabaseObject {
         $sql .= $abono;
         $sql .= " WHERE slug='".$slug."' AND user_id='".$id."'";
 
-
-        $database->query($sql);
-        return ($database->affected_rows() == 1) ? true : false;
+        $query = $database->query($sql);
+        return ($database->affected_rows($query) == 1) ? true : false;
     }
 
     public static function delete_goal($id, $slug){
         global $database;
         $sql = "DELETE FROM ahorro WHERE user_id='".$id."' AND slug='".$slug."'";
-        $database->query($sql);
+        $query = $database->query($sql);
 
-        return ($database->affected_rows() == 1) ? true : false;
+        return ($database->affected_rows($query) == 1) ? true : false;
     }
 
     public function giveVariablesForTab($id){

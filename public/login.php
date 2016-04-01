@@ -13,12 +13,16 @@ if(isset($_POST['submit'])){
         $session->set_message("");
         redirect_to("dashboard.php");
     } else{
-        echo "Nombre de usuario o contrase&ntilde;a equivocados.";
+        // print_r($session);
         $message = "Nombre de usuario o contrase&ntilde;a equivocados.";
+        $session->set_message($message);
+        output_message($session->get_message());
+        // echo $message;
     }
 } else {
     $username = "";
     $password = "";
+    $session->set_message(" ");
 }
 
 ?>
@@ -27,6 +31,7 @@ if(isset($_POST['submit'])){
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-md-offset-4 col-lg-offset-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 my-form">    
         <h2>Inicia Sesi&oacute;n</h2>
+        <?php echo output_message($session->get_message()); ?>
         <form action="login.php" method="post" role="form" id="signup-form">
             <div class="form-group">
                 <label for="username">        

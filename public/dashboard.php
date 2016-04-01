@@ -18,7 +18,7 @@
                     $contar_metas = count(json_decode(Ahorro::giveVariablesForTab($user->id)));
                     if($contar_metas == 0){
                         $session->set_message("Escribe una meta de ahorro.");
-                        redirect_to("index.php");
+                        // redirect_to("index.php");
                     }
 
                     echo "<strong>Hola {$user->full_name}</strong>";
