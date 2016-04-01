@@ -12,9 +12,7 @@
 
                 echo "<div style=\"visibility:hidden\" id=\"user-id\">{$user->id}</div>";
 
-
                 if($user){
-
                     $contar_metas = count(json_decode(Ahorro::giveVariablesForTab($user->id)));
                     if($contar_metas == 0){
                         $session->set_message("Escribe una meta de ahorro.");

@@ -26,7 +26,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="../public/dashboard.php">Metas</a></li>
-                <li><a href="index.php">Nueva Meta</a></li>
+                <li><a href="../includes/paths.php?redirect=index.php">Nueva Meta</a></li>
                 <li><a href="../public/logout.php">Salir</a></li>
             </ul>
         </div>
