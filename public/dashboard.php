@@ -44,7 +44,7 @@
                             <label for="abonar_todo">Todo lo que debo (<span id="tab-deuda"></span>).</label><br>
                 <input type="checkbox" id="una_parte"> <label for="una_parte">Una parte.</label>
                 <span class="error my_message"></span>
-                <input type="number" id="una_parte_cantidad" class="form-control my-input is-int" name="abonar_parte">
+                <input type="number" min="0" step="10" id="una_parte_cantidad" class="form-control my-input is-int" name="abonar_parte">
                 <button class="btn btn-danger submit-button">Ahorrar!</button>
             </form>
         </div>

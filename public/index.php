@@ -77,7 +77,7 @@ $session->set_message("");
         <form action="index.php"  method="post">
             <input type="text" class="form-control my-input" name="meta_ahorro" placeholder="C&oacute;mo se llama tu meta?" /><br>
             <span class="error my_message"></span>
-            <input type="number" class="form-control my-input is-int" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?" /><br>     
+            <input type="number" min="0" step="10" class="form-control my-input is-int" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?" /><br>     
 
             <input type="text" class="form-control my-input is-int date_picker1" name="fecha-inicial" placeholder="Desde el d&iacute;a"><br>
             <input type="text" class="form-control my-input date_picker2" name="fecha-final" placeholder="Hasta el d&iacute;a"><br>        
