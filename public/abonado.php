@@ -28,15 +28,18 @@ if(isset($session->user_id) && isset($_POST)){
     $suma = $user_savings[0]['ahorro_parcial'] + $abono;
 
     Ahorro::update_savings($suma, $_POST['slug'], $user->id );
+    $message = "Has abonado {$abono} a tu meta de {$user_savings[0]['meta_de_ahorro']}.";
+    $session->set_message($message);
+    redirect_to("dashboard.php");
 } else{
-    redirect_to("signin.php");
+    redirect_to("login.php");
 }
-
 ?>
 
 <div class="container-fluid">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-2">
             <h3>Gracias <?php echo $user->get_name_in_array()[0]; ?>.</h3><br>
+
             <p>Has abonado <?php echo $abono; ?> a tu meta de <?php echo $user_savings[0]['meta_de_ahorro']; ?></p>
             <!-- <div class="btn-group" role="group" aria-label="..."> -->
                 <a href="dashboard.php" class="btn btn-default">Seguir ahorrando</a>

@@ -4,5 +4,7 @@
     if(isset($session->user_id)){
         $session->logout();
         redirect_to("login.php");
+    } else{
+        redirect_to("login.php");
     }
 ?>

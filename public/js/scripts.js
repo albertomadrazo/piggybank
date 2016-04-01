@@ -233,6 +233,17 @@ var Tiempo = (function(){
     }
 })();
 
+
+function make_it_pop(selector, info){
+    if(!selector){
+        alert("mocos");
+    } else{
+        $(selector).fadeOut(200, function(){
+            $(this).text(info).fadeIn(400);
+        });
+    }
+}
+
 // corre cuando se cambia de meta (los tabs)
 // cambia los valores de la tabla de informacion y da las cantidades a
 // abonar
@@ -278,17 +289,25 @@ function getVariablesForTab(tab){
     // en la tabla actual
 
     // El nombre de la tabla (no slug)
-    $('#tab-meta_de_ahorro').html(tab['slug']);
+    // $('#tab-meta_de_ahorro').html(tab['slug']);
+    make_it_pop('#tab-meta_de_ahorro', 'Estadísticas '+tab['meta_de_ahorro']);
     // junto al checkbox de "todo lo que debo". Lado izquierdo
     // TODO: Este no esta funcionando
-    $('#tab-deuda').html(deuda);
+    // $('#tab-deuda').html(deuda);
+    make_it_pop('#tab-deuda', '$'+deuda);
+    
     // El indicador del intervalo "mes", "año"...
-    $('#tab-intervalo_a_texto').html(Tiempo.convertir_intervalo_a_texto(parseInt(tab['intervalo'])));
+    make_it_pop('#tab-intervalo_a_texto', Tiempo.convertir_intervalo_a_texto(parseInt(tab['intervalo']))+":");
+    // $('#tab-intervalo_a_texto').html(Tiempo.convertir_intervalo_a_texto(parseInt(tab['intervalo'])));
     // El indicador de que intervalo va
-    $('#tab-intervalo_actual').html(intervalo_actual);
-    $('#tab-intervalos_faltantes').html(intervalos_faltantes);
-    $('#tab-ahorro_parcial').html(tab['ahorro_parcial']);
-    $('#tab-cantidad_faltante').html(cantidad_faltante);
+    // $('#tab-intervalo_actual').html(intervalo_actual);
+    make_it_pop('#tab-intervalo_actual', intervalo_actual);
+    make_it_pop('#tab-intervalos_faltantes', intervalos_faltantes);
+    // $('#tab-intervalos_faltantes').html(intervalos_faltantes);
+    make_it_pop('#tab-ahorro_parcial', '$'+tab['ahorro_parcial']);
+    // $('#tab-ahorro_parcial').html(tab['ahorro_parcial']);
+    make_it_pop('#tab-cantidad_faltante', '$'+cantidad_faltante);
+    // $('#tab-cantidad_faltante').html(cantidad_faltante);
 
     // Campo escondido para enviar el nombre de la meta, debe ser slug
     $('#hidden-meta_de_ahorro').val(tab['slug']);

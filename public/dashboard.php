@@ -41,7 +41,7 @@
                 <input type="hidden" class="is-int" id="hidden-meta_de_ahorro" name="slug" value="">
                 <input type="checkbox" id="abonar_todo">
                 <input type="hidden" id="hidden-abonar_todo" name="abonar_todo" value="0">
-                            <label for="abonar_todo">Todo lo que debo ($<span id="tab-deuda"></span>).</label><br>
+                            <label for="abonar_todo">Todo lo que debo (<span id="tab-deuda"></span>).</label><br>
                 <input type="checkbox" id="una_parte"> <label for="una_parte">Una parte.</label>
                 <span class="error my_message"></span>
                 <input type="text" id="una_parte_cantidad" class="form-control my-input is-int" name="abonar_parte">
@@ -56,9 +56,9 @@
 
             <div class="tabla-estadistica">
                 <div class="tabla-de-ahorros">
-                    <div><h4>Estad&iacute;sticas <span id="tab-meta_de_ahorro"></span> </h4></div>
+                    <div><h4><span id="tab-meta_de_ahorro"></span> </h4></div>
                     <div>
-                    <span id="tab-intervalo_a_texto"></span>:
+                    <span id="tab-intervalo_a_texto"></span>
                      <b style="float: right"><span id="tab-intervalo_actual"></span></b>
                     </div>
                     <div>
@@ -67,11 +67,11 @@
                     </div>
                     <div>
                     Tienes:
-                    <b style="float: right">$<span id="tab-ahorro_parcial"></span></b>
+                    <b style="float: right"><span id="tab-ahorro_parcial"></span></b>
                     </div>
                     <div>
                     Faltan:
-                    <b style="float: right">$<span id="tab-cantidad_faltante"></span></b>
+                    <b style="float: right"><span id="tab-cantidad_faltante"></span></b>
                     </div>
                 </div>
             </div>
