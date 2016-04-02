@@ -10,8 +10,6 @@ $(function(){
 
         $('#to_update').val(slug);
 
-        alert(slug);
-
         $("#meta_de_ahorro").val(meta_de_ahorro);
         $("#total").val("$"+total);
         $("#fecha_inicial").val(fecha_inicial);

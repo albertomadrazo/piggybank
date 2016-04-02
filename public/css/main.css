@@ -71,9 +71,12 @@ body{
 }
 
 .submit-button{
-    width: 150px;
-    margin-left: auto;
-    float: right;
+    /* width: 150px; */
+    /* margin-left: auto; */
+    float: left;
+    /* margin: 0 auto; */
+
+    /* margin: 0 auto; */
 }
 
 .signup-button{
@@ -82,6 +85,10 @@ body{
 
 .my-form{
     margin-bottom: 50px;
+}
+
+#metas_tabs{
+    margin-top: 20px;
 }
 
 .tabla-estadistica{
@@ -231,12 +238,6 @@ div.ui-datepicker{ font-size:15px; }
     color: #fff;
 }
 
-.delete-btn{
-    font-weight: bolder;
-    text-transform: uppercase;
-    background-color: orange;
-    color: #000;
-}
 
 .delete-btn:hover{
     font-weight: bolder;
@@ -255,4 +256,45 @@ div.ui-datepicker{ font-size:15px; }
     font-size: 25px;
     color: #fff;
     margin-top:-4px;
+}
+
+/* .joco, .row{
+    border: 1px solid red;
+} */
+
+.radio-choose{
+    width: 3em;
+    height: 3em;
+    -moz-appearance: none
+    
+}
+
+input[type="checkbox"]{
+    width: 2em;
+    height: 2em;
+    vertical-align: middle;
+}
+
+
+.custom-row{
+    text-align: center;
+}
+
+.submit-button{
+    width:75%;
+}
+
+.my-p{
+    /* display:inline; */
+    font-family: 'Lato', sans-serif;
+}
+
+.delete-btn{
+    font-weight: bolder;
+    text-transform: uppercase;
+    background-color: orange;
+    color: #000;
+    float: right;
+    margin-top: 15px;
+    width: 50%;
 }

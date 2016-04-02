@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
 <?php include_layout_template("header.php"); ?>
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-4 col-md-offset-4 col-lg-offset-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 my-form">    
-        <h2>Inicia Sesi&oacute;n</h2>
+        <h2>Inicia Sesi&oacute;n o <a href="signup.php">Reg&iacute;strate</a></h2>
         <?php echo output_message($session->get_message()); ?>
         <form action="login.php" method="post" role="form" id="signup-form">
             <div class="form-group">

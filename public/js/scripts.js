@@ -167,16 +167,16 @@ var Tiempo = (function(){
 
         switch(intervalo){
             case 1:
-                intervalo_en_texto = "dia";
+                intervalo_en_texto = "Día";
                 break;
             case 7:
-                intervalo_en_texto = "semana";
+                intervalo_en_texto = "Semana";
                 break;
             case 30:
-                intervalo_en_texto = "mes";
+                intervalo_en_texto = "Mes";
                 break;
             case 365:
-                intervalo_en_texto = "año";
+                intervalo_en_texto = "Año";
                 break;
             default:
                 intervalo_en_texto = "---";
@@ -204,10 +204,9 @@ var Tiempo = (function(){
         fecha_final = Math.round(new Date(fecha_final).getTime()/1000);
 
         if(fecha_final - fecha_inicial < 0){
-            alert($('#al_dia').length);
             $("span#al_dia").html("Todav&iacute;a no empieza el período.");
             // return "Todavía no empieza el período."
-            return 0;
+            return -1;
         } else{
             return parseInt((fecha_final - fecha_inicial) / dia(intervalo));
         }

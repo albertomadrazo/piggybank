@@ -6,6 +6,7 @@
     <meta name="viewport" content="width = device-width, initial-scale = 1">
     <title>Piggy Bank</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <link rel="stylesheet" type="text/css" href="js/jquery-ui-1.11.4/jquery-ui.css" />
@@ -27,6 +28,8 @@
             <ul class="nav navbar-nav">
                 <li id="menu-dashboard"><a href="../public/dashboard.php">Metas</a></li>
                 <li id="menu-index"><a href="../public/index.php">Nueva Meta</a></li>
+                <li id="menu-update"><a href="../public/update.php">Editar</a></li>
+                <li id="menu-delete"><a href="../public/delete.php">Borrar</a></li>
                 <li><a href="../public/logout.php">Salir</a></li>
             </ul>
         </div>

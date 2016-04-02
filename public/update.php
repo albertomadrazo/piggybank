@@ -84,38 +84,38 @@ $session->set_message(" ");
             <input type="hidden" id="to_update" name="to_update">
             <input type="text" class="form-control my-input field-to-update" name="meta_ahorro" id="meta_de_ahorro" placeholder="C&oacute;mo se llama tu meta?"/><br>
             <span class="error my_message"></span>
-            <input type="text" class="form-control my-input is-int field-to-update" id="total" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?"/><br>     
-            <input type="text" class="form-control my-input is-int field-to-update date_picker1" name="fecha-inicial" id="fecha_inicial" placeholder="Desde el d&iacute;a"><br>
-            <input type="text" class="form-control my-input is-int field-to-update date_picker2" name="fecha-final" id="fecha_final" placeholder="Hasta el d&iacute;a"><br>        
+            <input type="number" min="0" step="1" class="form-control my-input is-int field-to-update" id="total" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?"/><br>     
+            <input type="text" class="form-control my-input is-int field-to-update date_picker1" name="fecha-inicial" autocomplete="off" readonly="true" id="fecha_inicial" placeholder="Desde el d&iacute;a"><br>
+            <input type="text" class="form-control my-input is-int field-to-update date_picker2" autocomplete="off" readonly="true" name="fecha-final" id="fecha_final" placeholder="Hasta el d&iacute;a"><br>        
 
             <strong>&iquest;Cada cu&aacute;ndo vas a abonar?</strong><br>
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    Diario<br class="visible-md visible-lg">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    Diario<br>
                     <label for="radio-diario">
-                    <input type="radio" id="radio-diario" name="intervalo" value="1">
+                    <input type="radio" class="radio-choose" id="radio-diario" name="intervalo" value="1">
                     </label><br class="visible-md visible-lg"> 
                 </div>    
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    Semanal<br class="visible-md visible-lg">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    Semanal<br>
                     <label for="radio-semanal">
-                    <input type="radio" id="radio-semanal" name="intervalo" value="7">
+                    <input type="radio" class="radio-choose" id="radio-semanal" name="intervalo" value="7">
                     </label><br>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    Mensual<br class="visible-md visible-lg">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    Mensual<br>
                     <label for="radio-mensual">
-                    <input type="radio" id="radio-mensual" name="intervalo" value="30">
+                    <input type="radio" class="radio-choose" id="radio-mensual" name="intervalo" value="30">
                     </label><br>                    
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    Anual<br class="visible-md visible-lg">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    Anual<br>
                     <label for="radio-anual">
-                    <input type="radio" id="radio-anual" name="intervalo" value="365">
+                    <input type="radio" class="radio-choose" id="radio-anual" name="intervalo" value="365">
                     </label><br>        
                 </div>
             </div>
-
+            <br>
             <button class="btn btn-danger submit-button my-btn" type="submit" name="submit" >Actualiza tu Meta</button>
             <br class="my-clear">
         </form>

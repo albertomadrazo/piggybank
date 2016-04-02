@@ -54,11 +54,11 @@
 
         <div class="tabla-estadistica">
             <div class="tabla-de-ahorros">
-                <div><h4>Estad&iacute;sticas <span id="tab-meta_de_ahorro"></span> </h4>
+                <div><h4><span id="tab-meta_de_ahorro"></span> </h4>
                 <!-- <input type="hidden" id="hidden-meta_de_ahorro" name="slug" value=""> -->
                 </div>
                 <div>
-                <span id="tab-intervalo_a_texto"></span>:
+                <span id="tab-intervalo_a_texto"></span>
                  <b style="float: right"><span id="tab-intervalo_actual"></span></b>
                 </div>
                 <div>
@@ -67,11 +67,11 @@
                 </div>
                 <div>
                 Tienes:
-                <b style="float: right">$<span id="tab-ahorro_parcial"></span></b>
+                <b style="float: right"><span id="tab-ahorro_parcial"></span></b>
                 </div>
                 <div>
                 Faltan:
-                <b style="float: right">$<span id="tab-cantidad_faltante"></span></b>
+                <b style="float: right"><span id="tab-cantidad_faltante"></span></b>
                 </div>
             </div>
         </div>
