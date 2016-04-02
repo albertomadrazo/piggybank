@@ -21,14 +21,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand nombre-app" href="#"><span class="glyphicon glyphicon-piggy-bank"></span> Piggy Bank</a>
+            <a class="navbar-brand nombre-app" href="../public/index.php"><span class="circulo glyphicon glyphicon-piggy-bank"></span> Piggy Bank</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="../public/dashboard.php">Metas</a></li>
-                <li><a href="../public/index.php">Nueva Meta</a></li>
+                <li id="menu-dashboard"><a href="../public/dashboard.php">Metas</a></li>
+                <li id="menu-index"><a href="../public/index.php">Nueva Meta</a></li>
                 <li><a href="../public/logout.php">Salir</a></li>
             </ul>
         </div>
     </div>
-</nav> 
+</nav>

@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
     echo Tiempo::convertir_intervalo_a_texto($calculo->intervalo);
     echo ($calculo->residuo > 0) ?" y un abono extra de {$calculo->residuo}" : "";
     $session->set_message("Has creado la meta {$meta_ahorro}.");
-    // redirect_to("dashboard.php");
+    redirect_to("dashboard.php");
 } else{
 
     if(isset($_POST['logout'])){
@@ -79,8 +79,8 @@ $session->set_message("");
             <span class="error my_message"></span>
             <input type="number" min="0" step="10" class="form-control my-input is-int" name="cantidad" placeholder="&iquest;Cu&aacute;nto quieres ahorrar?" /><br>     
 
-            <input type="text" class="form-control my-input is-int date_picker1" name="fecha-inicial" placeholder="Desde el d&iacute;a"><br>
-            <input type="text" class="form-control my-input date_picker2" name="fecha-final" placeholder="Hasta el d&iacute;a"><br>        
+            <input type="text" autocomplete="off" readonly="true" class="form-control my-input is-int date_picker1" name="fecha-inicial" placeholder="Desde el d&iacute;a"><br>
+            <input type="text" autocomplete="off" readonly="true" class="form-control my-input date_picker2" name="fecha-final" placeholder="Hasta el d&iacute;a"><br>        
 
             <strong>&iquest;Cada cu&aacute;ndo vas a abonar?</strong><br>
             <div class="row">

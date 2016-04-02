@@ -11,6 +11,13 @@ function toggleVisible(element){
     }
 }
 
+// Indica en qué página estamos en el menú
+function highlightCurrentPage(){
+    var url = window.location.pathname;
+    var currentPage = url.substring(url.lastIndexOf("/")+1, url.lastIndexOf("."));
+    var menu_class = "#menu-"+currentPage;
+    $(menu_class).addClass("active");
+}
 
 var can_be_submitted = false;
 
@@ -21,6 +28,8 @@ function canSubmit(){
 
 $(document).ready(function(){   
 
+
+    highlightCurrentPage();
     // TODO: mejorar este event handler
     $('.is-int').on('focusout', function(){
         var cifra = $(this).val();
@@ -193,7 +202,15 @@ var Tiempo = (function(){
     cantidad_de_intervalos = function(fecha_inicial, fecha_final, intervalo){
         fecha_inicial = Math.round(new Date(fecha_inicial).getTime()/1000);
         fecha_final = Math.round(new Date(fecha_final).getTime()/1000);
-        return parseInt((fecha_final - fecha_inicial) / dia(intervalo));
+
+        if(fecha_final - fecha_inicial < 0){
+            alert($('#al_dia').length);
+            $("span#al_dia").html("Todav&iacute;a no empieza el período.");
+            // return "Todavía no empieza el período."
+            return 0;
+        } else{
+            return parseInt((fecha_final - fecha_inicial) / dia(intervalo));
+        }
     };
 
     // si han pasado n(intervalo) dias entre dos fechas, retorna true,
@@ -259,7 +276,7 @@ function getVariablesForTab(tab){
     );
     var deuda = 0;
     var intervalo_actual = (Tiempo.cantidad_de_intervalos(
-            tab['fecha_inicial'], hoy, tab['intervalo']) + 1 // TODO: checar este +1
+            tab['fecha_inicial'], hoy, tab['intervalo'])+ 1 // TODO: checar este +1
     );
     var intervalos_faltantes = num_de_intervalos - intervalo_actual;
     var cantidad_faltante = tab['total'] - tab['ahorro_parcial'];
@@ -289,25 +306,17 @@ function getVariablesForTab(tab){
     // en la tabla actual
 
     // El nombre de la tabla (no slug)
-    // $('#tab-meta_de_ahorro').html(tab['slug']);
     make_it_pop('#tab-meta_de_ahorro', 'Estadísticas '+tab['meta_de_ahorro']);
     // junto al checkbox de "todo lo que debo". Lado izquierdo
-    // TODO: Este no esta funcionando
-    // $('#tab-deuda').html(deuda);
     make_it_pop('#tab-deuda', '$'+deuda);
     
     // El indicador del intervalo "mes", "año"...
     make_it_pop('#tab-intervalo_a_texto', Tiempo.convertir_intervalo_a_texto(parseInt(tab['intervalo']))+":");
-    // $('#tab-intervalo_a_texto').html(Tiempo.convertir_intervalo_a_texto(parseInt(tab['intervalo'])));
     // El indicador de que intervalo va
-    // $('#tab-intervalo_actual').html(intervalo_actual);
     make_it_pop('#tab-intervalo_actual', intervalo_actual);
     make_it_pop('#tab-intervalos_faltantes', intervalos_faltantes);
-    // $('#tab-intervalos_faltantes').html(intervalos_faltantes);
     make_it_pop('#tab-ahorro_parcial', '$'+tab['ahorro_parcial']);
-    // $('#tab-ahorro_parcial').html(tab['ahorro_parcial']);
     make_it_pop('#tab-cantidad_faltante', '$'+cantidad_faltante);
-    // $('#tab-cantidad_faltante').html(cantidad_faltante);
 
     // Campo escondido para enviar el nombre de la meta, debe ser slug
     $('#hidden-meta_de_ahorro').val(tab['slug']);

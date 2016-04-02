@@ -6,6 +6,7 @@
     <div class="row">
 
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <span class="msg"></span>
             <?php
             if(isset($session->user_id)){
                 $user = User::find_by_id($session->user_id);        
@@ -16,7 +17,7 @@
                     $contar_metas = count(json_decode(Ahorro::giveVariablesForTab($user->id)));
                     if($contar_metas == 0){
                         $session->set_message("Escribe una meta de ahorro.");
-                        // redirect_to("index.php");
+                        redirect_to("index.php");
                     }
 
                     echo "<strong>Hola {$user->full_name}</strong>";
@@ -26,7 +27,7 @@
                     "<br>";
                     $user_savings = Ahorro::get_by_user_id($user->id);
                     $goal = array();
-                    echo '<br><span id="al_dia"></span>';
+                    // echo '<br><span id="al_dia"></span>';
 
                 } else{
                     redirect_to("login.php");
@@ -35,7 +36,7 @@
                 redirect_to("login.php");
             }
             ?>
-
+            <span id="al_dia"> </span>
             <h3>&iquest;Cu&aacute;nto deseas depositar?</h3>
             <form action="abonado.php" method="post" onsubmit="canSubmit();">
                 <input type="hidden" class="is-int" id="hidden-meta_de_ahorro" name="slug" value="">
@@ -44,7 +45,7 @@
                             <label for="abonar_todo">Todo lo que debo (<span id="tab-deuda"></span>).</label><br>
                 <input type="checkbox" id="una_parte"> <label for="una_parte">Una parte.</label>
                 <span class="error my_message"></span>
-                <input type="number" min="0" step="10" id="una_parte_cantidad" class="form-control my-input is-int" name="abonar_parte">
+                <input type="number" min="0" step="1" id="una_parte_cantidad" class="form-control my-input is-int" name="abonar_parte">
                 <button class="btn btn-danger submit-button">Ahorrar!</button>
             </form>
         </div>
