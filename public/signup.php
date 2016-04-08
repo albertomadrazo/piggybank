@@ -2,22 +2,19 @@
 <?php if($session->is_logged_in()){ redirect_to("index.php"); }
 
 if(isset($_POST['submit'])){
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
     $full_name = trim($_POST['full_name']);
     $email = trim($_POST['email']);
-
-    // echo $username;
-    // echo $password;
-    // echo $full_name;
-    // echo $email;
 
     $new_user = User::sign_up($username, $password, $full_name, $email);
 
     if($new_user){
         $authenticate = User::authenticate($username, $password);
         $session->login($authenticate);
-        
+        echo "<br>---<br>";
+        print_r($authenticate);
+        echo "<br>---<br>";
         $session->set_message("Hola {$authenticate->get_name_in_array()[0]}, bienvenido.");
         redirect_to("index.php");
     } else{
@@ -31,6 +28,9 @@ if(isset($_POST['submit'])){
     $full_name = "";
     $email = "";
     $message = "";
+
+    // $pass = password_hash('beto', PASSWORD_DEFAULT);
+    // echo $pass;
 }
 
 ?>

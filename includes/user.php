@@ -21,27 +21,43 @@ class User extends DatabaseObject{
     }
 
     public function get_name_in_array(){
-        // var $separated_name = [];
         return explode(" ", $this->full_name);
     }
 
     public static function authenticate($username="", $password=""){
         global $database;
         $username = $database->escape_value($username);
-        $password = $database->escape_value($password);
 
         $sql = "SELECT * FROM users ";
         $sql .= "WHERE username = '{$username}' ";
-        $sql .= "AND password = '{$password}' ";
         $sql .= "LIMIT 1";
+
         $result_array = self::find_by_sql($sql);
-        return !empty($result_array) ? array_shift($result_array) : false;
+        echo "result_array = ";
+        print_r($result_array);
+        echo "<br>password = ". $password."<br>";
+
+        $mierda = "caca";
+        $vri = password_hash($mierda, PASSWORD_DEFAULT);
+        echo "<br>".$vri."<br>";
+        var_dump(password_verify($mierda, $vri));
+
+        $encrypted_password = trim($result_array[0]->password);
+
+
+        if(password_verify($password, $encrypted_password) == true){
+            return !empty($result_array) ? array_shift($result_array) : false;
+        } else{
+            echo "<strong><br>Contraseña equivocada.</strong><br>";
+        }
     }
+
 
     public static function sign_up($username="", $password="", $full_name="", $email=""){
         global $database;
         $username = $database->escape_value($username);
-        $password = $database->escape_value($password);
+        // Checar que no modifique mi cadena hasheada
+        $password = password_hash(trim($password), PASSWORD_DEFAULT);
         $full_name = $database->escape_value($full_name);
         $email = $database->escape_value($email);
 

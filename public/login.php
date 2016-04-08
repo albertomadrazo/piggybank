@@ -4,14 +4,14 @@ if($session->is_logged_in()){ redirect_to("index.php"); }
 
 if(isset($_POST['submit'])){
     $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
+    $password = $_POST['password'];
 
     $found_user = User::authenticate($username, $password);
 
     if($found_user){
         $session->login($found_user);
         $session->set_message("");
-        redirect_to("dashboard.php");
+        // redirect_to("dashboard.php");
     } else{
         $message = "Nombre de usuario o contrase&ntilde;a equivocados.";
         $session->set_message($message);
